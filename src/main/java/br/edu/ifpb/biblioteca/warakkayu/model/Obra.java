@@ -1,6 +1,8 @@
 package br.edu.ifpb.biblioteca.warakkayu.model;
 
-public abstract class Obra {
+import java.time.LocalDate;
+
+public abstract class Obra implements Emprestavel{
     private long codigo;
     private String titulo;
     private String autor;
@@ -8,9 +10,22 @@ public abstract class Obra {
     private StatusObra status;
 
     public abstract int getTempoEmprestimo();
+    @Override
+    public void emprestar() {
+        this.setStatus(StatusObra.EMPRESTADO);
+    }
+    public void devolver() {
+        this.setStatus(StatusObra.DISPONIVEL);
+    }
+    public boolean isDisponivel() {
+        return this.getStatus() == StatusObra.DISPONIVEL;
+    }
+    public  LocalDate calcularDataDevolucao() {
+        return LocalDate.now().plusDays(this.getTempoEmprestimo());
+    }
 
     public long getCodigo() {
-        return codigo;
+        return this.codigo;
     }
 
     public void setCodigo(long codigo) {
@@ -18,7 +33,7 @@ public abstract class Obra {
     }
 
     public String getTitulo() {
-        return titulo;
+        return this.titulo;
     }
 
     public void setTitulo(String titulo) {
@@ -26,7 +41,7 @@ public abstract class Obra {
     }
 
     public String getAutor() {
-        return autor;
+        return this.autor;
     }
 
     public void setAutor(String autor) {
@@ -34,7 +49,7 @@ public abstract class Obra {
     }
 
     public int getAnoPublicacao() {
-        return anoPublicacao;
+        return this.anoPublicacao;
     }
 
     public void setAnoPublicacao(int anoPublicacao) {
@@ -42,7 +57,7 @@ public abstract class Obra {
     }
 
     public StatusObra getStatus() {
-        return status;
+        return this.status;
     }
 
     public void setStatus(StatusObra status) {

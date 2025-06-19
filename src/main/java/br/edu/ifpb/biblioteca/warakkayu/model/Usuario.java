@@ -16,7 +16,7 @@ public class Usuario {
     }
 
     public String getNome() {
-        return nome;
+        return this.nome;
     }
 
     public void setNome(String nome) {
@@ -24,7 +24,7 @@ public class Usuario {
     }
 
     public String getMatricula() {
-        return matricula;
+        return this.matricula;
     }
 
     public void setMatricula(String matricula) {
@@ -32,7 +32,7 @@ public class Usuario {
     }
 
     public TipoUsuario getTipoUsuario() {
-        return tipoUsuario;
+        return this.tipoUsuario;
     }
 
     public void setTipoUsuario(TipoUsuario tipoUsuario) {
@@ -40,7 +40,7 @@ public class Usuario {
     }
 
     public String getTelefone() {
-        return telefone;
+        return this.telefone;
     }
 
     public void setTelefone(String telefone) {
@@ -48,7 +48,7 @@ public class Usuario {
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
