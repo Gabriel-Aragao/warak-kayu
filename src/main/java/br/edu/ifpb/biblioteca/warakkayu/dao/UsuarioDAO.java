@@ -5,6 +5,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -15,13 +17,11 @@ public class UsuarioDAO {
 private Path path;
 
     public UsuarioDAO () {
-        Path path = Paths.get("");
-        path.resolve("../../../../../../../../../dados/obras.json");
-        this.path = path;
+        this.path = Paths.get("dados","usuarios.json");
     }
 
     public void salvar(Usuario usuario){
-        List<Usuario> usuarios = List.of(recuperar());
+        List<Usuario> usuarios = new ArrayList<>(Arrays.asList(recuperar()));
         usuarios.add(usuario);
         String json = new Gson().toJson(usuarios);
         
