@@ -8,6 +8,7 @@ public abstract class Obra implements Emprestavel{
     private String autor;
     private int anoPublicacao;
     private StatusObra status;
+    private double valorDaMulta;
 
     public abstract int getTempoEmprestimo();
     @Override
@@ -62,6 +63,17 @@ public abstract class Obra implements Emprestavel{
 
     public void setStatus(StatusObra status) {
         this.status = status;
+    }
+
+    public Double getValorDaMulta(){
+        return this.valorDaMulta;
+    }
+
+    public void setValorDaMulta(double valorDaMulta){
+        this.valorDaMulta = valorDaMulta;
+    }
+    public double calcularMulta(int diasDeAtraso) {
+        return getValorDaMulta() * diasDeAtraso;
     }
     
 }

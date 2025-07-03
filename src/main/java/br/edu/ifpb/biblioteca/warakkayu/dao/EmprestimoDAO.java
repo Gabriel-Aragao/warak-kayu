@@ -11,17 +11,17 @@ import java.util.List;
 
 import com.google.gson.Gson;
 
-import br.edu.ifpb.biblioteca.warakkayu.model.Obra;
+import br.edu.ifpb.biblioteca.warakkayu.model.Emprestimo;
 
-public class ObraDAO {
+public class EmprestimoDAO {
     private Path path;
 
-    public ObraDAO () {
-        this.path = Paths.get("dados","obras.json");
+    public EmprestimoDAO () {
+        this.path = Paths.get("dados","emprestimos.json");
     }
 
-    public void salvar(List<Obra> obras){
-        String json = new Gson().toJson(obras);
+    public void salvar(List<Emprestimo> emprestimos){
+        String json = new Gson().toJson(emprestimos);
         try {
             Files.writeString(this.getPath(), json, StandardCharsets.UTF_8);
         } catch (IOException e) {
@@ -29,15 +29,15 @@ public class ObraDAO {
         }
     }
 
-    public List<Obra> recuperar(){
+    public List<Emprestimo> recuperar(){
         try {
             String jsonString = Files.readString(this.getPath());
-            return Arrays.asList(new Gson().fromJson(jsonString, Obra[].class));
+            return Arrays.asList(new Gson().fromJson(jsonString, Emprestimo[].class));
         } catch (IOException e) {
             e.printStackTrace();
         } 
 
-        return new ArrayList<Obra>();
+        return new ArrayList<Emprestimo>();
     }
 
     private Path getPath(){

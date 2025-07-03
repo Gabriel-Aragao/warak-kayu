@@ -20,11 +20,8 @@ private Path path;
         this.path = Paths.get("dados","usuarios.json");
     }
 
-    public void salvar(Usuario usuario){
-        List<Usuario> usuarios = new ArrayList<>(Arrays.asList(recuperar()));
-        usuarios.add(usuario);
-        String json = new Gson().toJson(usuarios);
-        
+    public void salvar(List<Usuario> usuarios){
+        String json = new Gson().toJson(usuarios);     
         try {
             Files.writeString(this.getPath(), json, StandardCharsets.UTF_8);
         } catch (IOException e) {
@@ -32,15 +29,15 @@ private Path path;
         }
     }
 
-    public Usuario[] recuperar(){
+    public List<Usuario> recuperar(){
         try {
             String jsonString = Files.readString(this.getPath());
-            return new Gson().fromJson(jsonString, Usuario[].class);
+            return Arrays.asList(new Gson().fromJson(jsonString, Usuario[].class));
         } catch (IOException e) {
             e.printStackTrace();
         } 
 
-        return new Usuario[0];
+        return new ArrayList<Usuario>();
     }
 
     private Path getPath(){
