@@ -32,7 +32,7 @@ private Path path;
     public List<Usuario> recuperar(){
         try {
             String jsonString = Files.readString(this.getPath());
-            return Arrays.asList(new Gson().fromJson(jsonString, Usuario[].class));
+            return new ArrayList<>(Arrays.asList(new Gson().fromJson(jsonString, Usuario[].class)));
         } catch (IOException e) {
             e.printStackTrace();
         } 

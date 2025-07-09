@@ -11,6 +11,7 @@ import java.util.List;
 
 import com.google.gson.Gson;
 
+import br.edu.ifpb.biblioteca.warakkayu.model.Livro;
 import br.edu.ifpb.biblioteca.warakkayu.model.Obra;
 
 public class ObraDAO {
@@ -32,7 +33,7 @@ public class ObraDAO {
     public List<Obra> recuperar(){
         try {
             String jsonString = Files.readString(this.getPath());
-            return Arrays.asList(new Gson().fromJson(jsonString, Obra[].class));
+            return new ArrayList<>(Arrays.asList(new Gson().fromJson(jsonString, Livro[].class)));
         } catch (IOException e) {
             e.printStackTrace();
         } 

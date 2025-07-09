@@ -10,6 +10,15 @@ public abstract class Obra implements Emprestavel{
     private StatusObra status;
     private double valorDaMulta;
 
+    public Obra(long codigo, String titulo, String autor, int anoPublicacao, StatusObra statusObra, double valorDaMulta) {
+        this.setCodigo(codigo);
+        this.setTitulo(titulo);
+        this.setAutor(autor);
+        this.setAnoPublicacao(anoPublicacao);
+        this.setStatus(statusObra);
+        this.setValorDaMulta(valorDaMulta);
+    }
+
     public abstract int getTempoEmprestimo();
     @Override
     public void emprestar() {

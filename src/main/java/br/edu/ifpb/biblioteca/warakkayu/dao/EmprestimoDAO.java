@@ -32,7 +32,7 @@ public class EmprestimoDAO {
     public List<Emprestimo> recuperar(){
         try {
             String jsonString = Files.readString(this.getPath());
-            return Arrays.asList(new Gson().fromJson(jsonString, Emprestimo[].class));
+            return new ArrayList<>(Arrays.asList(new Gson().fromJson(jsonString, Emprestimo[].class)));
         } catch (IOException e) {
             e.printStackTrace();
         } 
