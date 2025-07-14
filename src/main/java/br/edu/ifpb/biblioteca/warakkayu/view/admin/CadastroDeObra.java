@@ -1,12 +1,9 @@
-package br.edu.ifpb.biblioteca.warakkayu.view;
+package br.edu.ifpb.biblioteca.warakkayu.view.admin;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JTextField;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
+import javax.swing.JPanel;
+
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,8 +13,9 @@ import br.edu.ifpb.biblioteca.warakkayu.model.Livro;
 import br.edu.ifpb.biblioteca.warakkayu.model.Obra;
 import br.edu.ifpb.biblioteca.warakkayu.model.StatusObra;
 import br.edu.ifpb.biblioteca.warakkayu.view.componentes.CampoDeCadastro;
+import br.edu.ifpb.biblioteca.warakkayu.view.componentes.Janela;
 
-public class CadastroDeObra extends JFrame{
+public class CadastroDeObra extends Janela{
     private CampoDeCadastro codigo;
     private CampoDeCadastro titulo;
     private CampoDeCadastro autor;
@@ -27,27 +25,24 @@ public class CadastroDeObra extends JFrame{
     private JButton criarObra;
 
     public CadastroDeObra() {
-        this.setTitle("Warak Kayu/cadastro/obra/new");
-        this.setSize(800, 600);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLayout(new BoxLayout(this.getContentPane(),BoxLayout.Y_AXIS));
-
+        super();
+        
         this.codigo = new CampoDeCadastro("Código: ", 20);
         this.titulo = new CampoDeCadastro("Título: ", 20);
         this.autor = new CampoDeCadastro("Autor: ", 20);
         this.anoPublicacao = new CampoDeCadastro("Ano da Publicação: ", 20);
         this.status = new CampoDeCadastro("Status: ", 20);
         this.valorDaMulta = new CampoDeCadastro("Valor da multa: ", 20);
-        this.criarObra = new JButton("Criar");
+        this.criarObra = new JButton("Cadastrar");
 
-        this.add(this.codigo);
-        this.add(this.titulo);
-        this.add(this.autor);
-        this.add(this.anoPublicacao);
-        this.add(this.status);
-        this.add(this.valorDaMulta);
+        this.centro.add(this.codigo);
+        this.centro.add(this.titulo);
+        this.centro.add(this.autor);
+        this.centro.add(this.anoPublicacao);
+        this.centro.add(this.status);
+        this.centro.add(this.valorDaMulta);
 
-        this.add(this.criarObra);
+        this.sul.add(this.criarObra);
 
         this.criarObra.addActionListener(new ActionListener() {
             @Override
