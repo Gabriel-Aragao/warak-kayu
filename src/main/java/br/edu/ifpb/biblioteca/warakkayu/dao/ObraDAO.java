@@ -24,8 +24,8 @@ public class ObraDAO implements Persistivel<Obra>{
         this.obras = this.recuperar();
     }
 
-    private void salvar(List<Obra> obras) throws IOException{
-        String json = new Gson().toJson(obras);
+    private void salvar() throws IOException{
+        String json = new Gson().toJson(this.obras);
         Files.writeString(this.getPath(), json, StandardCharsets.UTF_8);
     }
 
@@ -58,7 +58,7 @@ public class ObraDAO implements Persistivel<Obra>{
     public boolean add(Obra obra) {
         this.obras.add(obra);
         try {
-            this.salvar(obras);
+            this.salvar();
             return true;
         } catch (IOException e) {
             return false;
@@ -84,6 +84,11 @@ public class ObraDAO implements Persistivel<Obra>{
             obraEncontrada.setStatus(obra.getStatus());
             obraEncontrada.setTitulo(obra.getTitulo());
             obraEncontrada.setValorDaMulta(obra.getValorDaMulta());
+            try {
+                this.salvar();
+            } catch (IOException e) {
+                return false;
+            }
             return true;
         }
         return false;
@@ -96,6 +101,11 @@ public class ObraDAO implements Persistivel<Obra>{
         Obra obraEncontrada = getObraById(id);
         if(obraEncontrada!= null){
             obras.remove(obraEncontrada);
+            try {
+                this.salvar();
+            } catch (IOException e) {
+                return false;
+            }
             return true;
         }
         return false;
