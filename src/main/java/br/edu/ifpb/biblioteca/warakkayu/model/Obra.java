@@ -11,18 +11,21 @@ public abstract class Obra implements Emprestavel{
     private int anoPublicacao;
     private StatusObra status;
     private double valorDaMulta;
+    private TipoObra tipoObra;
 
-    public Obra(long codigo, String titulo, String autor, int anoPublicacao, StatusObra statusObra, double valorDaMulta) {
+    public Obra(TipoObra tipoObra, long codigo, String titulo, String autor, int anoPublicacao, double valorDaMulta) {
+        this.tipoObra = tipoObra;
         this.id = UUID.randomUUID();
         this.setCodigo(codigo);
         this.setTitulo(titulo);
         this.setAutor(autor);
         this.setAnoPublicacao(anoPublicacao);
-        this.setStatus(statusObra);
+        this.setStatus(StatusObra.DISPONIVEL);
         this.setValorDaMulta(valorDaMulta);
     }
 
-    public Obra(UUID id, long codigo, String titulo, String autor, int anoPublicacao, StatusObra statusObra, double valorDaMulta) {
+    public Obra(TipoObra tipoObra, UUID id, long codigo, String titulo, String autor, int anoPublicacao, StatusObra statusObra, double valorDaMulta) {
+        this.tipoObra = tipoObra;
         this.id = id;
         this.setCodigo(codigo);
         this.setTitulo(titulo);
