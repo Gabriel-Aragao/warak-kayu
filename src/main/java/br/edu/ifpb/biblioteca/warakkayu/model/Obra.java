@@ -11,9 +11,24 @@ public abstract class Obra implements Emprestavel{
     private int anoPublicacao;
     private StatusObra status;
     private double valorDaMulta;
+    private TipoObra tipoObra;
 
-    public Obra(long codigo, String titulo, String autor, int anoPublicacao, StatusObra statusObra, double valorDaMulta) {
+    public Obra(TipoObra tipoObra, long codigo, String titulo, String autor, 
+            int anoPublicacao, double valorDaMulta) {
+        this.tipoObra = tipoObra;
         this.id = UUID.randomUUID();
+        this.setCodigo(codigo);
+        this.setTitulo(titulo);
+        this.setAutor(autor);
+        this.setAnoPublicacao(anoPublicacao);
+        this.setStatus(StatusObra.DISPONIVEL);
+        this.setValorDaMulta(valorDaMulta);
+    }
+
+    public Obra(TipoObra tipoObra, UUID id, long codigo, String titulo, 
+            String autor, int anoPublicacao, StatusObra statusObra, double valorDaMulta) {
+        this.tipoObra = tipoObra;
+        this.id = id;
         this.setCodigo(codigo);
         this.setTitulo(titulo);
         this.setAutor(autor);
@@ -22,14 +37,14 @@ public abstract class Obra implements Emprestavel{
         this.setValorDaMulta(valorDaMulta);
     }
 
-    public Obra(UUID id, long codigo, String titulo, String autor, int anoPublicacao, StatusObra statusObra, double valorDaMulta) {
-        this.id = id;
-        this.setCodigo(codigo);
-        this.setTitulo(titulo);
-        this.setAutor(autor);
-        this.setAnoPublicacao(anoPublicacao);
-        this.setStatus(statusObra);
-        this.setValorDaMulta(valorDaMulta);
+    public Obra(long codigo, String titulo, String autor, int anoPublicacao,
+            double valorDaMulta, TipoObra tipoObra) {
+        this.codigo = codigo;
+        this.titulo = titulo;
+        this.autor = autor;
+        this.anoPublicacao = anoPublicacao;
+        this.valorDaMulta = valorDaMulta;
+        this.tipoObra = tipoObra;
     }
 
     public abstract int getTempoEmprestimo();

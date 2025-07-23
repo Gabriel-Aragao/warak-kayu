@@ -9,95 +9,115 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
-import br.edu.ifpb.biblioteca.warakkayu.model.Livro;
+import br.edu.ifpb.biblioteca.warakkayu.exceptions.ObraNaoEncontradaException;
+import br.edu.ifpb.biblioteca.warakkayu.exceptions.PersistenciaException;
 import br.edu.ifpb.biblioteca.warakkayu.model.Obra;
+import br.edu.ifpb.biblioteca.warakkayu.util.ObraDeserializer;
 
-public class ObraDAO implements Persistivel<Obra>{
+public class ObraDAO implements Persistivel<Obra> {
     private Path path;
     private List<Obra> obras;
+    private final Gson gson;
 
-    public ObraDAO () {
-        this.path = Paths.get("dados","obras.json");
+    public ObraDAO() throws PersistenciaException {
+        this.path = Paths.get("dados", "obras.json");
+
+        this.gson = new GsonBuilder()
+                .registerTypeAdapter(Obra.class, new ObraDeserializer())
+                .setPrettyPrinting()
+                .create();
+
         this.obras = this.recuperar();
     }
 
-    private void salvar(List<Obra> obras) throws IOException{
-        String json = new Gson().toJson(obras);
-        Files.writeString(this.getPath(), json, StandardCharsets.UTF_8);
+    private void salvar() throws PersistenciaException {
+        if (Files.notExists(path.getParent())) {
+            try {
+                Files.createDirectories(path.getParent());
+            } catch (IOException e) {
+                throw new PersistenciaException("Não foi possível encontrar ou criar um diretorio de armazenamento.",
+                        e);
+            }
+        }
+        String json = this.gson.toJson(this.obras);
+        try {
+            Files.writeString(this.getPath(), json, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new PersistenciaException("Não foi possível confirmar a operação.", e);
+        }
     }
 
-    private List<Obra> recuperar(){
+    private List<Obra> recuperar() throws PersistenciaException {
+        if (Files.notExists(path.getParent())) {
+            try {
+                Files.createDirectories(path.getParent());
+            } catch (IOException e) {
+                throw new PersistenciaException("Não foi possível encontrar ou criar um diretorio de armazenamento.",
+                        e);
+            }
+        }
+        if (Files.notExists(this.getPath())) {
+            return new ArrayList<>();
+        }
         try {
             String jsonString = Files.readString(this.getPath());
-            return new ArrayList<>(Arrays.asList(new Gson().fromJson(jsonString, Livro[].class)));
+            return new ArrayList<>(Arrays.asList(this.gson.fromJson(jsonString, Obra[].class)));
         } catch (IOException e) {
-            e.printStackTrace();
-        } 
-
-        return new ArrayList<Obra>();
+            throw new PersistenciaException("Não foi possível recuperar as obras salvas!", e);
+        }
     }
 
-    private Path getPath(){
+    private Path getPath() {
         return this.path;
     }
 
-    private Obra getObraById(UUID id){
-        for(Obra obra: this.obras){
-            if(id.equals(obra.getId())){
+    private Obra getObraById(UUID id) {
+        for (Obra obra : this.obras) {
+            if (id.equals(obra.getId())) {
                 return obra;
             }
         }
         return null;
     }
 
-
     @Override
-    public boolean add(Obra obra) {
+    public void add(Obra obra) throws PersistenciaException {
         this.obras.add(obra);
-        try {
-            this.salvar(obras);
-            return true;
-        } catch (IOException e) {
-            return false;
-        }
+        this.salvar();
     }
 
-
-
     @Override
+
     public List<Obra> list() {
-        return new ArrayList<Obra>(this.obras);
+        return this.obras;
     }
 
-
-
     @Override
-    public boolean update(UUID id, Obra obra) {
+    public void update(UUID id, Obra obra) throws PersistenciaException, ObraNaoEncontradaException {
         Obra obraEncontrada = getObraById(id);
-        if(obraEncontrada != null){
+        if (obraEncontrada != null) {
             obraEncontrada.setCodigo(obra.getCodigo());
             obraEncontrada.setTitulo(obra.getTitulo());
             obraEncontrada.setAutor(obra.getAutor());
-            obraEncontrada.setStatus(obra.getStatus());
             obraEncontrada.setTitulo(obra.getTitulo());
             obraEncontrada.setValorDaMulta(obra.getValorDaMulta());
-            return true;
+            this.salvar();
+        } else {
+            throw new ObraNaoEncontradaException();
         }
-        return false;
     }
 
-
-
     @Override
-    public boolean delete(UUID id) {
+    public void delete(UUID id) throws PersistenciaException, ObraNaoEncontradaException {
         Obra obraEncontrada = getObraById(id);
-        if(obraEncontrada!= null){
+        if (obraEncontrada != null) {
             obras.remove(obraEncontrada);
-            return true;
+            this.salvar();
+        } else {
+            throw new ObraNaoEncontradaException();
         }
-        return false;
     }
 }

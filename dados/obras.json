@@ -1,1 +1,62 @@
-[{"codigo":1,"titulo":"1","autor":"1","anoPublicacao":1,"status":"DISPONIVEL","valorDaMulta":1.0},{"codigo":1,"titulo":"aT","autor":"A","anoPublicacao":2025,"status":"DISPONIVEL","valorDaMulta":2.4}]
+[
+  {
+    "id": "140482d9-b299-4122-ba40-eb4422409a02",
+    "codigo": 1,
+    "titulo": "Teste",
+    "autor": "autor",
+    "anoPublicacao": 10,
+    "status": "DISPONIVEL",
+    "valorDaMulta": 10.0,
+    "tipoObra": "LIVRO"
+  },
+  {
+    "id": "15a23224-5907-4557-ae98-fcf5eedbf992",
+    "codigo": 10,
+    "titulo": "q",
+    "autor": "a",
+    "anoPublicacao": 0,
+    "status": "DISPONIVEL",
+    "valorDaMulta": 14.0,
+    "tipoObra": "REVISTA"
+  },
+  {
+    "id": "65d2cbd7-3240-4415-ac5b-95d46fc1cab9",
+    "codigo": 0,
+    "titulo": "a",
+    "autor": "a",
+    "anoPublicacao": 0,
+    "status": "DISPONIVEL",
+    "valorDaMulta": 13.0,
+    "tipoObra": "LIVRO"
+  },
+  {
+    "id": "5d0d30aa-b2f5-4ef8-b862-36728e71573c",
+    "codigo": 10,
+    "titulo": "q",
+    "autor": "a",
+    "anoPublicacao": 20,
+    "status": "DISPONIVEL",
+    "valorDaMulta": 20.45,
+    "tipoObra": "LIVRO"
+  },
+  {
+    "id": "8aa242c6-c045-4959-bc6a-e08c906a5992",
+    "codigo": 10,
+    "titulo": "aaaa",
+    "autor": "f",
+    "anoPublicacao": 0,
+    "status": "DISPONIVEL",
+    "valorDaMulta": 2.5,
+    "tipoObra": "LIVRO"
+  },
+  {
+    "id": "10a5cac7-716e-44e1-be9c-0472dc0a9dd8",
+    "codigo": 110,
+    "titulo": "Novo Livro",
+    "autor": "x",
+    "anoPublicacao": 1990,
+    "status": "DISPONIVEL",
+    "valorDaMulta": 1.4,
+    "tipoObra": "ARTIGO"
+  }
+]
