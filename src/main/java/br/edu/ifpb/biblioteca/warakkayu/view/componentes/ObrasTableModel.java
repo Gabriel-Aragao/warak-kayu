@@ -22,7 +22,7 @@ public class ObrasTableModel extends AbstractTableModel {
 
     public void setObras(List<Obra> obras) {
         this.obras = obras;
-        fireTableDataChanged(); // Notifica a JTable para se redesenhar
+        fireTableDataChanged();
     }
 
     @Override

@@ -39,14 +39,15 @@ public class GerenciamentoDeObrasController  implements AcoesDoPainelListener {
 
     @Override
     public void aoClicarCriar() {
-        router.toCadastroDeObra(this.view);
+        Obra obraSelecionada = view.getObraSelecionada();
+        router.toCadastroDeObra(this.view, obraSelecionada);
     }
 
     @Override
     public void aoClicarAtualizar() {
         Obra obraSelecionada = view.getObraSelecionada();
         if (obraSelecionada != null) {
-            router.toEdicaoDeObra(this.view, obraSelecionada);
+            router.toCadastroDeObra(this.view, obraSelecionada);
         } else {
             view.exibirAviso("Selecione uma obra na tabela para atualizar.");
         }

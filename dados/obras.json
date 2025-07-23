@@ -42,11 +42,21 @@
   {
     "id": "8aa242c6-c045-4959-bc6a-e08c906a5992",
     "codigo": 10,
-    "titulo": "f",
+    "titulo": "aaaa",
     "autor": "f",
     "anoPublicacao": 0,
     "status": "DISPONIVEL",
     "valorDaMulta": 2.5,
     "tipoObra": "LIVRO"
+  },
+  {
+    "id": "10a5cac7-716e-44e1-be9c-0472dc0a9dd8",
+    "codigo": 110,
+    "titulo": "Novo Livro",
+    "autor": "x",
+    "anoPublicacao": 1990,
+    "status": "DISPONIVEL",
+    "valorDaMulta": 1.4,
+    "tipoObra": "ARTIGO"
   }
 ]

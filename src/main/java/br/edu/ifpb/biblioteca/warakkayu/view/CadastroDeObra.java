@@ -28,17 +28,13 @@ public class CadastroDeObra extends Janela{
     private AcoesDeCadastroListener listener; 
     private Obra obra;
     
-    public CadastroDeObra(JFrame janelaPai, Router router) {
-        super();
-        this.iniciarTela(janelaPai);
-        
-    }
-
     public CadastroDeObra(JFrame janelaPai, Router router, Obra obra) {
         super();
         this.obra = obra;
         this.iniciarTela(janelaPai);
-        this.preencherCampos();
+        if(this.obra != null){
+            this.preencherCampos();
+        }
     }
 
     private void iniciarTela(JFrame janelaPai) {        
