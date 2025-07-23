@@ -3,6 +3,7 @@ package br.edu.ifpb.biblioteca.warakkayu.view.componentes;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.text.NumberFormat;
+import java.util.Locale;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
@@ -24,7 +25,7 @@ public class CampoDeCadastro extends JPanel {
         this.label.setHorizontalAlignment(SwingConstants.RIGHT);
 
         if (tipo == TipoDeEntrada.DECIMAL) {
-            NumberFormat formatoDecimal = NumberFormat.getNumberInstance();
+            NumberFormat formatoDecimal = NumberFormat.getNumberInstance(new Locale("en", "US"));
             formatoDecimal.setMinimumFractionDigits(2);
             formatoDecimal.setMaximumFractionDigits(2);
 
