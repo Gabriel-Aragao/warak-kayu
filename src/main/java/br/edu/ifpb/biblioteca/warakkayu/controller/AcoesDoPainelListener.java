@@ -7,4 +7,5 @@ public interface AcoesDoPainelListener {
     public void aoClicarRemover();
     public void aoClicarEmprestar();
     public void aoClicarDevolver();
+    public void aplicarPermissoes();
 }

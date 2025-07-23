@@ -1,17 +1,19 @@
 package br.edu.ifpb.biblioteca.warakkayu.controller;
 
+import br.edu.ifpb.biblioteca.warakkayu.Router;
 import br.edu.ifpb.biblioteca.warakkayu.exceptions.ObraNaoEncontradaException;
 import br.edu.ifpb.biblioteca.warakkayu.exceptions.PersistenciaException;
 import br.edu.ifpb.biblioteca.warakkayu.model.Obra;
+import br.edu.ifpb.biblioteca.warakkayu.model.TipoUsuario;
 import br.edu.ifpb.biblioteca.warakkayu.service.AuthService;
 import br.edu.ifpb.biblioteca.warakkayu.service.ObraService;
 import br.edu.ifpb.biblioteca.warakkayu.view.GerenciamentoDeObras;
-import br.edu.ifpb.biblioteca.warakkayu.view.Router;
 
 public class GerenciamentoDeObrasController  implements AcoesDoPainelListener {
 
     private GerenciamentoDeObras view;
     private ObraService obraService;
+    private AuthService authService;
     private Router router;
 
     public GerenciamentoDeObrasController(
@@ -24,9 +26,9 @@ public class GerenciamentoDeObrasController  implements AcoesDoPainelListener {
         this.view = view;
         this.obraService = obraService;
         this.router = router;
-        
+        this.authService = authService;
         this.view.getPainelAcoes().setListener(this);
-        this.view.getPainelAcoes().aplicarPermissoes(authService.getTipoUsuario());
+        this.aplicarPermissoes();
     }
     
     public void carregarDados() {
@@ -89,4 +91,34 @@ public class GerenciamentoDeObrasController  implements AcoesDoPainelListener {
             view.exibirAviso("Selecione uma obra para realizar a Devolução.");
         }
     }
+
+    @Override
+    public void aplicarPermissoes() {
+        TipoUsuario tipoUsuario = this.authService.getTipoUsuario();
+        switch (tipoUsuario) {
+            case ADMIN:
+                this.view.getPainelAcoes().getBotaoCriar().setEnabled(true);
+                this.view.getPainelAcoes().getBotaoAtualizar().setEnabled(true);
+                this.view.getPainelAcoes().getBotaoRemover().setEnabled(true);
+                this.view.getPainelAcoes().getBotaoEmprestar().setEnabled(false);
+                this.view.getPainelAcoes().getBotaoDevolver().setEnabled(false);
+                break;
+            case BIBLIOTECARIO:
+                this.view.getPainelAcoes().getBotaoCriar().setEnabled(false);
+                this.view.getPainelAcoes().getBotaoAtualizar().setEnabled(false);
+                this.view.getPainelAcoes().getBotaoRemover().setEnabled(false);
+                this.view.getPainelAcoes().getBotaoEmprestar().setEnabled(true);
+                this.view.getPainelAcoes().getBotaoDevolver().setEnabled(true);
+                break;
+            case ESTAGIARIO:
+            default:
+                this.view.getPainelAcoes().getBotaoCriar().setEnabled(false);
+                this.view.getPainelAcoes().getBotaoAtualizar().setEnabled(false);
+                this.view.getPainelAcoes().getBotaoRemover().setEnabled(false);
+                this.view.getPainelAcoes().getBotaoEmprestar().setEnabled(false); 
+                this.view.getPainelAcoes().getBotaoDevolver().setEnabled(true);
+                break;
+        }
+    }
+
 }

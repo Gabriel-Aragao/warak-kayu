@@ -1,12 +1,12 @@
 package br.edu.ifpb.biblioteca.warakkayu.controller;
 
+import br.edu.ifpb.biblioteca.warakkayu.Router;
 import br.edu.ifpb.biblioteca.warakkayu.exceptions.ObraNaoEncontradaException;
 import br.edu.ifpb.biblioteca.warakkayu.exceptions.PersistenciaException;
 import br.edu.ifpb.biblioteca.warakkayu.model.Obra;
 import br.edu.ifpb.biblioteca.warakkayu.model.TipoObra;
 import br.edu.ifpb.biblioteca.warakkayu.service.ObraService;
 import br.edu.ifpb.biblioteca.warakkayu.view.CadastroDeObra;
-import br.edu.ifpb.biblioteca.warakkayu.view.Router;
 
 public class CadastroDeObraController implements AcoesDeCadastroListener {
     

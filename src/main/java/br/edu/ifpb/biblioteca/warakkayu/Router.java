@@ -1,4 +1,4 @@
-package br.edu.ifpb.biblioteca.warakkayu.view;
+package br.edu.ifpb.biblioteca.warakkayu;
 
 import javax.swing.JFrame;
 
@@ -7,6 +7,8 @@ import br.edu.ifpb.biblioteca.warakkayu.controller.GerenciamentoDeObrasControlle
 import br.edu.ifpb.biblioteca.warakkayu.model.Obra;
 import br.edu.ifpb.biblioteca.warakkayu.service.AuthService;
 import br.edu.ifpb.biblioteca.warakkayu.service.ObraService;
+import br.edu.ifpb.biblioteca.warakkayu.view.CadastroDeObra;
+import br.edu.ifpb.biblioteca.warakkayu.view.GerenciamentoDeObras;
 
 public class Router {
 

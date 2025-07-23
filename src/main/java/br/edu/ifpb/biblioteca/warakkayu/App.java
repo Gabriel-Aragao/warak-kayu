@@ -6,7 +6,6 @@ import br.edu.ifpb.biblioteca.warakkayu.dao.ObraDAO;
 import br.edu.ifpb.biblioteca.warakkayu.exceptions.PersistenciaException;
 import br.edu.ifpb.biblioteca.warakkayu.service.AuthService;
 import br.edu.ifpb.biblioteca.warakkayu.service.ObraService;
-import br.edu.ifpb.biblioteca.warakkayu.view.Router;
 
 
 public class App 

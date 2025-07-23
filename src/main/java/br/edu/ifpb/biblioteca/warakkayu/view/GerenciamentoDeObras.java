@@ -5,6 +5,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
+import br.edu.ifpb.biblioteca.warakkayu.Router;
 import br.edu.ifpb.biblioteca.warakkayu.model.Obra;
 import br.edu.ifpb.biblioteca.warakkayu.view.componentes.Cabecalho;
 import br.edu.ifpb.biblioteca.warakkayu.view.componentes.Janela;
