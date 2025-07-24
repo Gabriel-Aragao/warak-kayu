@@ -4,9 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
 import java.awt.Font;
-import java.awt.Color;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,7 +21,7 @@ public class Cabecalho extends JPanel {
         super(new BorderLayout());
 
         this.tituloLabel = new JLabel(titulo);
-        Font fonteTitulo = new Font("Arial", Font.BOLD, 18);
+        Font fonteTitulo = new Font("Arial", Font.BOLD, 20);
         this.tituloLabel.setFont(fonteTitulo);
         this.tituloLabel.setHorizontalAlignment(SwingConstants.CENTER); 
         

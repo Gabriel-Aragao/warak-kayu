@@ -6,8 +6,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import br.edu.ifpb.biblioteca.warakkayu.controller.AcoesDoPainelListener;
-import br.edu.ifpb.biblioteca.warakkayu.model.TipoUsuario;
-
 
 public class Rodape extends JPanel {
 

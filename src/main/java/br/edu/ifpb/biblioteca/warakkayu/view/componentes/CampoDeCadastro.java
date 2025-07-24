@@ -4,13 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.text.NumberFormat;
 import java.util.Locale;
+import java.awt.Font;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.text.NumberFormatter;
-
 
 public class CampoDeCadastro extends JPanel {
 
@@ -20,9 +20,12 @@ public class CampoDeCadastro extends JPanel {
     public CampoDeCadastro(String textoJLabel, int tamanhoTextField, TipoDeEntrada tipo) {
         super(new BorderLayout(5, 5));
 
+        Font fonte = new Font("Arial", Font.BOLD, 16);
+
         this.label = new JLabel(textoJLabel);
-        this.label.setPreferredSize(new Dimension(150, this.label.getPreferredSize().height));
+        this.label.setPreferredSize(new Dimension(200, this.label.getPreferredSize().height));
         this.label.setHorizontalAlignment(SwingConstants.RIGHT);
+        this.label.setFont(fonte);
 
         if (tipo == TipoDeEntrada.DECIMAL) {
             NumberFormat formatoDecimal = NumberFormat.getNumberInstance(new Locale("en", "US"));
@@ -34,7 +37,6 @@ public class CampoDeCadastro extends JPanel {
             formatadorDecimal.setAllowsInvalid(false);
             formatadorDecimal.setMinimum(0.0);
 
-            
             this.formattedTextField = new JFormattedTextField(formatadorDecimal);
             this.formattedTextField.setValue(0.0); 
         } else if (tipo == TipoDeEntrada.INTEIRO) {
@@ -52,9 +54,7 @@ public class CampoDeCadastro extends JPanel {
         } else{
             this.formattedTextField = new JFormattedTextField();
         }
-
-        this.formattedTextField.setColumns(tamanhoTextField);
-
+        this.formattedTextField.setFont(fonte);
         this.add(this.label, BorderLayout.WEST);
         this.add(this.formattedTextField, BorderLayout.CENTER);
     }
