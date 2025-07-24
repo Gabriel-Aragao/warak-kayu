@@ -6,11 +6,13 @@ import javax.swing.JFrame;
 import br.edu.ifpb.biblioteca.warakkayu.controller.CadastroDeObraController;
 import br.edu.ifpb.biblioteca.warakkayu.controller.GerenciamentoDeObrasController;
 import br.edu.ifpb.biblioteca.warakkayu.model.Obra;
+import br.edu.ifpb.biblioteca.warakkayu.model.Usuario;
+import br.edu.ifpb.biblioteca.warakkayu.service.AuthService;
 import br.edu.ifpb.biblioteca.warakkayu.service.ObraService;
 import br.edu.ifpb.biblioteca.warakkayu.view.CadastroDeObra;
 import br.edu.ifpb.biblioteca.warakkayu.view.GerenciamentoDeObras;
+import br.edu.ifpb.biblioteca.warakkayu.view.RealizacaoEmprestimo;
 
-// --- Imports de Usuário ADICIONADOS ---
 import br.edu.ifpb.biblioteca.warakkayu.controller.CadastroDeUsuarioController;
 import br.edu.ifpb.biblioteca.warakkayu.controller.GerenciamentoDeUsuariosController;
 import br.edu.ifpb.biblioteca.warakkayu.model.Usuario;
@@ -18,7 +20,6 @@ import br.edu.ifpb.biblioteca.warakkayu.service.UsuarioService;
 import br.edu.ifpb.biblioteca.warakkayu.view.CadastroDeUsuario;
 import br.edu.ifpb.biblioteca.warakkayu.view.GerenciamentoDeUsuarios;
 
-// --- Outros Imports ---
 import br.edu.ifpb.biblioteca.warakkayu.service.AuthService;
 
 
@@ -27,13 +28,14 @@ public class Router {
     private ObraService obraService;
     private UsuarioService usuarioService; 
     private AuthService authService;
+    private EmprestimoService emprestimoService;
 
 
-
-    public Router(ObraService obraService, UsuarioService usuarioService, AuthService authService) {
+    public Router(ObraService obraService, AuthService authService, EmprestimoService emprestimoService, UsuarioService usuarioService) {
         this.obraService = obraService;
         this.usuarioService = usuarioService; 
         this.authService = authService;
+        this.emprestimoService = emprestimoService;
     }
     
     private void disposeJanelaPai(JFrame frame) {
@@ -41,8 +43,6 @@ public class Router {
             frame.setVisible(false);
         }
     }
-
-
 
     public void toGerenciamentoObras(JFrame janelaPai) {
         disposeJanelaPai(janelaPai);
@@ -59,20 +59,20 @@ public class Router {
         view.setVisible(true);
     }
 
+    public void toEmprestimo(JFrame janelaPai, Obra obraSelecionada) {
+        disposeJanelaPai(janelaPai);
+        RealizacaoEmprestimo view = new RealizacaoEmprestimo(janelaPai, this, obraSelecionada);
+        RealizacaoEmprestimoController controller = new RealizacaoEmprestimoController(view, emprestimoService, this);
+    }
+   
     public void toGerenciamentoUsuarios(JFrame janelaPai) {
         disposeJanelaPai(janelaPai);
         GerenciamentoDeUsuarios view = new GerenciamentoDeUsuarios(janelaPai, this);
-        // Supondo que o GerenciamentoDeUsuariosController também precise do authService
         GerenciamentoDeUsuariosController controller = new GerenciamentoDeUsuariosController(view, this.usuarioService, this, this.authService);
-        controller.carregarDados(); // Supondo que este método exista para carregar os usuários na tabela
+        controller.carregarDados();
         view.setVisible(true);
     }
 
-    /**
-     * Navega para a tela de cadastro ou edição de um usuário.
-     * @param janelaPai A janela anterior a ser escondida.
-     * @param usuarioSelecionado O usuário a ser editado (null se for um novo cadastro).
-     */
     public void toCadastroDeUsuario(JFrame janelaPai, Usuario usuarioSelecionado) {
         disposeJanelaPai(janelaPai);
         CadastroDeUsuario view = new CadastroDeUsuario(janelaPai, this, usuarioSelecionado);
