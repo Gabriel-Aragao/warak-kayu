@@ -52,11 +52,21 @@
   {
     "id": "10a5cac7-716e-44e1-be9c-0472dc0a9dd8",
     "codigo": 110,
-    "titulo": "Novo Livro",
+    "titulo": "ABC",
     "autor": "x",
     "anoPublicacao": 1990,
     "status": "DISPONIVEL",
     "valorDaMulta": 1.4,
     "tipoObra": "ARTIGO"
+  },
+  {
+    "id": "c3a95662-6112-4280-a081-9fabf05105fb",
+    "codigo": 45566,
+    "titulo": "Batman",
+    "autor": "DC",
+    "anoPublicacao": 1990,
+    "status": "DISPONIVEL",
+    "valorDaMulta": 15.0,
+    "tipoObra": "LIVRO"
   }
 ]
