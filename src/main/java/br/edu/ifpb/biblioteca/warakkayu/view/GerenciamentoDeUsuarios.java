@@ -4,32 +4,32 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import java.awt.BorderLayout; 
+
 import br.edu.ifpb.biblioteca.warakkayu.Router;
-import br.edu.ifpb.biblioteca.warakkayu.model.Obra;
+import br.edu.ifpb.biblioteca.warakkayu.model.Usuario; 
 import br.edu.ifpb.biblioteca.warakkayu.view.componentes.Cabecalho;
 import br.edu.ifpb.biblioteca.warakkayu.view.componentes.Janela;
-import br.edu.ifpb.biblioteca.warakkayu.view.componentes.ObrasTableModel;
+import br.edu.ifpb.biblioteca.warakkayu.view.componentes.UsuariosTableModel;
 import br.edu.ifpb.biblioteca.warakkayu.view.componentes.Rodape;
 
-import java.awt.BorderLayout;
-
-
-public class GerenciamentoDeObras extends Janela {
-
+public class GerenciamentoDeUsuarios extends Janela {
+    
     private JTable tabela;
-    private ObrasTableModel obrasTableModel;
+    private UsuariosTableModel usuariosTableModel;
     private JScrollPane scroll;
     private Cabecalho voltar;
     private Rodape painelAcoes;
 
     
-    public GerenciamentoDeObras(JFrame janelaPai, Router router) {
+    public GerenciamentoDeUsuarios(JFrame janelaPai, Router router) {
         super();
         
-        this.voltar = new Cabecalho(this, null, "Obras");
+      
+        this.voltar = new Cabecalho(this, null, "Usuários"); 
         
-        this.obrasTableModel = new ObrasTableModel();
-        this.tabela = new JTable(this.obrasTableModel);
+        this.usuariosTableModel = new UsuariosTableModel();
+        this.tabela = new JTable(this.usuariosTableModel);
         this.tabela.setFillsViewportHeight(true);
         this.tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
@@ -42,33 +42,34 @@ public class GerenciamentoDeObras extends Janela {
         this.sul.add(this.painelAcoes, BorderLayout.CENTER);
         
     }
-
-    public Obra getObraSelecionada() {
+    
+    // ✅ 4. MÉTODOS ESSENCIAIS ADICIONADOS
+    public Usuario getUsuarioSelecionado() {
         int selectedRow = tabela.getSelectedRow();
         if (selectedRow != -1) {
-            return obrasTableModel.getObraAt(selectedRow);
+            return usuariosTableModel.getUsuarioAt(selectedRow); 
         }
         return null;
     }
 
     public JTable getTabela() {
-        return this.tabela;
+        return tabela;
     }
 
-    public ObrasTableModel getObrasTableModel() {
-        return this.obrasTableModel;
+    public UsuariosTableModel getUsuariosTableModel() {
+        return usuariosTableModel;
     }
 
     public JScrollPane getScroll() {
-        return this.scroll;
+        return scroll;
     }
 
     public Cabecalho getVoltar() {
-        return this.voltar;
+        return voltar;
     }
 
     public Rodape getPainelAcoes() {
-        return this.painelAcoes;
+        return painelAcoes;
     }
-
+    
 }
