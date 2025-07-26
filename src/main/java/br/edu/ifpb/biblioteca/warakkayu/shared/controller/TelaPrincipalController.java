@@ -46,6 +46,11 @@ public class TelaPrincipalController implements AcoesTelaPrincipalListener {
                 this.view.getBotaoRelatorios().setEnabled(false);
                 break;
             default:
+                this.view.getBotaoUsuarios().setEnabled(false);
+                this.view.getBotaoObras().setEnabled(false);
+                this.view.getBotaoEmprestimos().setEnabled(false);
+                this.view.getBotaoDevolucoes().setEnabled(false);
+                this.view.getBotaoRelatorios().setEnabled(false);
                 break;
         }
 

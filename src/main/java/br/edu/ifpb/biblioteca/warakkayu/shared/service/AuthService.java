@@ -6,7 +6,7 @@ public class AuthService {
     
     private TipoUsuario tipoUsuario;
     public AuthService() {
-        this.tipoUsuario = TipoUsuario.BIBLIOTECARIO;
+        this.tipoUsuario = TipoUsuario.LEITOR;
     }
 
     public TipoUsuario getTipoUsuario() {
