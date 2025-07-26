@@ -1,72 +1,42 @@
 [
   {
-    "id": "140482d9-b299-4122-ba40-eb4422409a02",
-    "codigo": 1,
-    "titulo": "Teste",
-    "autor": "autor",
-    "anoPublicacao": 10,
-    "status": "DISPONIVEL",
-    "valorDaMulta": 10.0,
-    "tipoObra": "LIVRO"
-  },
-  {
-    "id": "15a23224-5907-4557-ae98-fcf5eedbf992",
+    "id": "51e9a5b2-a866-4ad8-b564-990539ff2a01",
     "codigo": 10,
-    "titulo": "q",
-    "autor": "a",
-    "anoPublicacao": 0,
-    "status": "DISPONIVEL",
-    "valorDaMulta": 14.0,
-    "tipoObra": "REVISTA"
-  },
-  {
-    "id": "65d2cbd7-3240-4415-ac5b-95d46fc1cab9",
-    "codigo": 0,
-    "titulo": "a",
-    "autor": "a",
-    "anoPublicacao": 0,
-    "status": "DISPONIVEL",
-    "valorDaMulta": 13.0,
-    "tipoObra": "LIVRO"
-  },
-  {
-    "id": "5d0d30aa-b2f5-4ef8-b862-36728e71573c",
-    "codigo": 10,
-    "titulo": "q",
-    "autor": "a",
-    "anoPublicacao": 20,
-    "status": "DISPONIVEL",
-    "valorDaMulta": 20.45,
-    "tipoObra": "LIVRO"
-  },
-  {
-    "id": "8aa242c6-c045-4959-bc6a-e08c906a5992",
-    "codigo": 10,
-    "titulo": "aaaa",
-    "autor": "f",
-    "anoPublicacao": 0,
-    "status": "DISPONIVEL",
-    "valorDaMulta": 2.5,
-    "tipoObra": "LIVRO"
-  },
-  {
-    "id": "10a5cac7-716e-44e1-be9c-0472dc0a9dd8",
-    "codigo": 110,
-    "titulo": "ABC",
-    "autor": "x",
+    "titulo": "Livro 1",
+    "autor": "Autor 1",
     "anoPublicacao": 1990,
-    "status": "DISPONIVEL",
-    "valorDaMulta": 1.4,
+    "status": "EMPRESTADO",
+    "valorDaMulta": 1.0,
+    "tipoObra": "LIVRO"
+  },
+  {
+    "id": "27436d68-7ff1-4af3-81d2-e423765d0598",
+    "codigo": 110,
+    "titulo": "Artigo",
+    "autor": "autor 2",
+    "anoPublicacao": 1980,
+    "status": "EMPRESTADO",
+    "valorDaMulta": 1.3,
     "tipoObra": "ARTIGO"
   },
   {
-    "id": "c3a95662-6112-4280-a081-9fabf05105fb",
-    "codigo": 45566,
-    "titulo": "Batman",
-    "autor": "DC",
-    "anoPublicacao": 1990,
+    "id": "3a91dc34-ac6f-4d3d-853f-66749f8e853a",
+    "codigo": 110,
+    "titulo": "Artigo 2",
+    "autor": "JJ",
+    "anoPublicacao": 1980,
     "status": "DISPONIVEL",
-    "valorDaMulta": 15.0,
-    "tipoObra": "LIVRO"
+    "valorDaMulta": 1.2,
+    "tipoObra": "ARTIGO"
+  },
+  {
+    "id": "3abb0651-8cd1-4c86-b3c6-1ccdb44e079d",
+    "codigo": 10,
+    "titulo": "Revista",
+    "autor": "Editora",
+    "anoPublicacao": 1999,
+    "status": "EMPRESTADO",
+    "valorDaMulta": 10.0,
+    "tipoObra": "REVISTA"
   }
 ]

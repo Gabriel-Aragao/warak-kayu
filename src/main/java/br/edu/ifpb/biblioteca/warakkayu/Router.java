@@ -2,25 +2,24 @@ package br.edu.ifpb.biblioteca.warakkayu;
 
 import javax.swing.JFrame;
 
-// Imports de Obra
-import br.edu.ifpb.biblioteca.warakkayu.controller.CadastroDeObraController;
-import br.edu.ifpb.biblioteca.warakkayu.controller.GerenciamentoDeObrasController;
-import br.edu.ifpb.biblioteca.warakkayu.model.Obra;
-import br.edu.ifpb.biblioteca.warakkayu.model.Usuario;
-import br.edu.ifpb.biblioteca.warakkayu.service.AuthService;
-import br.edu.ifpb.biblioteca.warakkayu.service.ObraService;
-import br.edu.ifpb.biblioteca.warakkayu.view.CadastroDeObra;
-import br.edu.ifpb.biblioteca.warakkayu.view.GerenciamentoDeObras;
-import br.edu.ifpb.biblioteca.warakkayu.view.RealizacaoEmprestimo;
-
-import br.edu.ifpb.biblioteca.warakkayu.controller.CadastroDeUsuarioController;
-import br.edu.ifpb.biblioteca.warakkayu.controller.GerenciamentoDeUsuariosController;
-import br.edu.ifpb.biblioteca.warakkayu.model.Usuario;
-import br.edu.ifpb.biblioteca.warakkayu.service.UsuarioService;
-import br.edu.ifpb.biblioteca.warakkayu.view.CadastroDeUsuario;
-import br.edu.ifpb.biblioteca.warakkayu.view.GerenciamentoDeUsuarios;
-
-import br.edu.ifpb.biblioteca.warakkayu.service.AuthService;
+import br.edu.ifpb.biblioteca.warakkayu.obra.controller.CadastroDeObraController;
+import br.edu.ifpb.biblioteca.warakkayu.obra.controller.GerenciamentoDeObrasController;
+import br.edu.ifpb.biblioteca.warakkayu.obra.model.Obra;
+import br.edu.ifpb.biblioteca.warakkayu.obra.service.ObraService;
+import br.edu.ifpb.biblioteca.warakkayu.obra.view.CadastroDeObra;
+import br.edu.ifpb.biblioteca.warakkayu.obra.view.GerenciamentoDeObras;
+import br.edu.ifpb.biblioteca.warakkayu.shared.controller.TelaPrincipalController;
+import br.edu.ifpb.biblioteca.warakkayu.shared.service.AuthService;
+import br.edu.ifpb.biblioteca.warakkayu.shared.view.TelaPrincipal;
+import br.edu.ifpb.biblioteca.warakkayu.usuario.controller.CadastroDeUsuarioController;
+import br.edu.ifpb.biblioteca.warakkayu.usuario.controller.GerenciamentoDeUsuariosController;
+import br.edu.ifpb.biblioteca.warakkayu.usuario.model.Usuario;
+import br.edu.ifpb.biblioteca.warakkayu.usuario.service.UsuarioService;
+import br.edu.ifpb.biblioteca.warakkayu.usuario.view.CadastroDeUsuario;
+import br.edu.ifpb.biblioteca.warakkayu.usuario.view.GerenciamentoDeUsuarios;
+import br.edu.ifpb.biblioteca.warakkayu.emprestimo.controller.RealizacaoEmprestimoController;
+import br.edu.ifpb.biblioteca.warakkayu.emprestimo.service.EmprestimoService;
+import br.edu.ifpb.biblioteca.warakkayu.emprestimo.view.RealizacaoEmprestimo;
 
 
 public class Router {
@@ -47,7 +46,7 @@ public class Router {
     public void toGerenciamentoObras(JFrame janelaPai) {
         disposeJanelaPai(janelaPai);
         GerenciamentoDeObras view = new GerenciamentoDeObras(janelaPai, this);
-        GerenciamentoDeObrasController controller = new GerenciamentoDeObrasController(view, this.obraService, this, this.authService);
+        GerenciamentoDeObrasController controller = new GerenciamentoDeObrasController(view, this.obraService, this);
         controller.carregarDados();
         view.setVisible(true);
     }
@@ -59,10 +58,13 @@ public class Router {
         view.setVisible(true);
     }
 
-    public void toEmprestimo(JFrame janelaPai, Obra obraSelecionada) {
+    public void toEmprestimo(JFrame janelaPai) {
         disposeJanelaPai(janelaPai);
-        RealizacaoEmprestimo view = new RealizacaoEmprestimo(janelaPai, this, obraSelecionada);
-        RealizacaoEmprestimoController controller = new RealizacaoEmprestimoController(view, emprestimoService, this);
+        RealizacaoEmprestimo view = new RealizacaoEmprestimo(janelaPai, this);
+        RealizacaoEmprestimoController controller = new RealizacaoEmprestimoController(
+            view, authService, emprestimoService, this);
+        controller.carregarDados();
+        view.setVisible(true);
     }
    
     public void toGerenciamentoUsuarios(JFrame janelaPai) {
@@ -77,6 +79,13 @@ public class Router {
         disposeJanelaPai(janelaPai);
         CadastroDeUsuario view = new CadastroDeUsuario(janelaPai, this, usuarioSelecionado);
         CadastroDeUsuarioController controller = new CadastroDeUsuarioController(view, this.usuarioService, this);
+        view.setVisible(true);
+    }
+
+    public void toTelaPrincipal(JFrame janelaPai) {
+        disposeJanelaPai(janelaPai);
+        TelaPrincipal view = new TelaPrincipal();
+        TelaPrincipalController controller = new TelaPrincipalController(view, this, this.authService);
         view.setVisible(true);
     }
 }
