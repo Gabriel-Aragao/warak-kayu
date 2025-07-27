@@ -1,7 +1,6 @@
 package br.edu.ifpb.biblioteca.warakkayu.emprestimo.service;
 
 import java.util.List;
-import java.util.UUID;
 
 import br.edu.ifpb.biblioteca.warakkayu.emprestimo.dao.EmprestimoDAO;
 import br.edu.ifpb.biblioteca.warakkayu.emprestimo.model.Emprestimo;
@@ -12,7 +11,6 @@ import br.edu.ifpb.biblioteca.warakkayu.obra.model.StatusObra;
 import br.edu.ifpb.biblioteca.warakkayu.obra.service.ObraService;
 import br.edu.ifpb.biblioteca.warakkayu.shared.exceptions.PersistenciaException;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.exception.UsuarioNaoAptoException;
-import br.edu.ifpb.biblioteca.warakkayu.usuario.exception.UsuarioNaoEncontradoException;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.model.TipoUsuario;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.model.Usuario;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.service.UsuarioService;

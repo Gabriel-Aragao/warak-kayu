@@ -95,7 +95,6 @@ public class UsuarioDAO implements Persistivel<Usuario> {
     public void update(UUID id, Usuario usuario) throws PersistenciaException, UsuarioNaoEncontradoException {
         Usuario usuarioEncontrado = findById(id);
         if (usuarioEncontrado != null) {
-            usuarioEncontrado.setMatricula(usuario.getMatricula());
             usuarioEncontrado.setNome(usuario.getNome());
             usuarioEncontrado.setEmail(usuario.getEmail());
             usuarioEncontrado.setTelefone(usuario.getTelefone());
@@ -127,5 +126,18 @@ public class UsuarioDAO implements Persistivel<Usuario> {
         throw new UsuarioNaoEncontradoException();
     }
 
+    public Usuario findByMatricula(String matricula) throws UsuarioNaoEncontradoException{
+       for (Usuario usuario : this.usuarios) {
+            if (matricula.equals(usuario.getMatricula())) {
+                return usuario;
+            }
+        }
+        throw new UsuarioNaoEncontradoException();
+    }
     
+    public void cadastrarSenha(String matricula, String senha) throws UsuarioNaoEncontradoException, PersistenciaException{
+        Usuario usuario = this.findByMatricula(matricula);
+        usuario.setSenha(senha);
+        this.salvar();
+    }
 }

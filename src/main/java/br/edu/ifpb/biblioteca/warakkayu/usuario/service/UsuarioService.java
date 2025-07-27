@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import br.edu.ifpb.biblioteca.warakkayu.obra.model.Obra;
-import br.edu.ifpb.biblioteca.warakkayu.obra.model.StatusObra;
 import br.edu.ifpb.biblioteca.warakkayu.shared.exceptions.NaoEncontradoException;
 import br.edu.ifpb.biblioteca.warakkayu.shared.exceptions.PersistenciaException;
 import br.edu.ifpb.biblioteca.warakkayu.shared.service.CRUDService;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.dao.UsuarioDAO;
+import br.edu.ifpb.biblioteca.warakkayu.usuario.exception.MatriculaEmUsoException;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.exception.UsuarioNaoEncontradoException;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.model.TipoUsuario;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.model.Usuario;
@@ -55,13 +54,17 @@ public class UsuarioService implements CRUDService <Usuario>{
     }
 
     public void save(Usuario usuario, String matricula, String nome, String email, String telefone, TipoUsuario tipoUsuario) 
-            throws PersistenciaException, UsuarioNaoEncontradoException {
+            throws PersistenciaException, UsuarioNaoEncontradoException, MatriculaEmUsoException {
 
         if(usuario == null) {
-            usuario = new Usuario(matricula, nome, email, telefone, tipoUsuario);   
-            this.add(usuario);
+            try {
+                this.usuarioDao.findByMatricula(matricula);
+                throw new MatriculaEmUsoException();
+            } catch (UsuarioNaoEncontradoException e) {
+                usuario = new Usuario(matricula, nome, email, telefone, tipoUsuario);   
+                this.add(usuario);
+            }
         } else {
-            usuario.setMatricula(matricula);
             usuario.setNome(nome);
             usuario.setEmail(email);
             usuario.setTelefone(telefone);
@@ -73,5 +76,15 @@ public class UsuarioService implements CRUDService <Usuario>{
     @Override
     public Usuario findById(UUID id) throws NaoEncontradoException {
         return usuarioDao.findById(id);
-    }    
+    }   
+    
+    public Usuario findByMatricula(String matricula) throws NaoEncontradoException {
+        return usuarioDao.findByMatricula(matricula);
+    }  
+
+    public void cadastrarSenha(String matricula, String senha) 
+            throws UsuarioNaoEncontradoException, PersistenciaException 
+    {
+        usuarioDao.cadastrarSenha(matricula, senha);
+    }
 }

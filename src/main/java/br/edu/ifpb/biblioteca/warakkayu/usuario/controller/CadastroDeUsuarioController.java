@@ -3,6 +3,7 @@ package br.edu.ifpb.biblioteca.warakkayu.usuario.controller;
 import br.edu.ifpb.biblioteca.warakkayu.Router;
 import br.edu.ifpb.biblioteca.warakkayu.shared.controller.AcoesDeCadastroListener;
 import br.edu.ifpb.biblioteca.warakkayu.shared.exceptions.PersistenciaException;
+import br.edu.ifpb.biblioteca.warakkayu.usuario.exception.MatriculaEmUsoException;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.exception.UsuarioNaoEncontradoException;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.model.TipoUsuario;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.model.Usuario;
@@ -39,7 +40,9 @@ public class CadastroDeUsuarioController implements AcoesDeCadastroListener {
             this.view.exibirErro("Erro ao salvar o Usuário! \nOperação Cancelada.");
         } catch (UsuarioNaoEncontradoException e) {
             this.view.exibirErro("Usuário Não encontrado! \nOperação Cancelada.");
-        }
+        } catch (MatriculaEmUsoException e) {
+            this.view.exibirErro(e.getMessage());
+        }   
         
         this.router.toGerenciamentoUsuarios(view);;
     }

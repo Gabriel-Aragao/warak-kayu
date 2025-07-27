@@ -5,8 +5,6 @@ import br.edu.ifpb.biblioteca.warakkayu.usuario.model.TipoUsuario;
 import br.edu.ifpb.biblioteca.warakkayu.shared.service.AuthService;
 import br.edu.ifpb.biblioteca.warakkayu.shared.view.TelaPrincipal;
 
-import javax.swing.JOptionPane;
-
 public class TelaPrincipalController implements AcoesTelaPrincipalListener {
     
     private TelaPrincipal view;
@@ -22,7 +20,14 @@ public class TelaPrincipalController implements AcoesTelaPrincipalListener {
     }
     
     private void atribuirPermissoes(){
+        this.view.getBotaoUsuarios().setEnabled(false);
+        this.view.getBotaoObras().setEnabled(false);
+        this.view.getBotaoEmprestimos().setEnabled(false);
+        this.view.getBotaoDevolucoes().setEnabled(false);
+        this.view.getBotaoRelatorios().setEnabled(false);
+        
         TipoUsuario tipoUsuario = authService.getTipoUsuario();
+        
         switch (tipoUsuario) {
             case ADMIN:
                 this.view.getBotaoUsuarios().setEnabled(true);
@@ -53,7 +58,6 @@ public class TelaPrincipalController implements AcoesTelaPrincipalListener {
                 this.view.getBotaoRelatorios().setEnabled(false);
                 break;
         }
-
     }
 
     @Override

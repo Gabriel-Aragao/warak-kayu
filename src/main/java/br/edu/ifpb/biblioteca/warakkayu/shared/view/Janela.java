@@ -21,7 +21,7 @@ public class Janela extends JFrame{
         this.setTitle("Warak Kayu");
         this.setSize(600, 400);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLayout(new BorderLayout());
+        this.setLayout(new BorderLayout(10, 10));
         this.setLocationRelativeTo(null);
         this.setVisible(true);
 

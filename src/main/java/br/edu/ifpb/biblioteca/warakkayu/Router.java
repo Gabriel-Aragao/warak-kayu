@@ -8,8 +8,12 @@ import br.edu.ifpb.biblioteca.warakkayu.obra.model.Obra;
 import br.edu.ifpb.biblioteca.warakkayu.obra.service.ObraService;
 import br.edu.ifpb.biblioteca.warakkayu.obra.view.CadastroDeObra;
 import br.edu.ifpb.biblioteca.warakkayu.obra.view.GerenciamentoDeObras;
+import br.edu.ifpb.biblioteca.warakkayu.shared.controller.TelaCadastroSenhaController;
+import br.edu.ifpb.biblioteca.warakkayu.shared.controller.TelaLoginController;
 import br.edu.ifpb.biblioteca.warakkayu.shared.controller.TelaPrincipalController;
 import br.edu.ifpb.biblioteca.warakkayu.shared.service.AuthService;
+import br.edu.ifpb.biblioteca.warakkayu.shared.view.TelaCadastroSenha;
+import br.edu.ifpb.biblioteca.warakkayu.shared.view.TelaLogin;
 import br.edu.ifpb.biblioteca.warakkayu.shared.view.TelaPrincipal;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.controller.CadastroDeUsuarioController;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.controller.GerenciamentoDeUsuariosController;
@@ -30,7 +34,11 @@ public class Router {
     private EmprestimoService emprestimoService;
 
 
-    public Router(ObraService obraService, AuthService authService, EmprestimoService emprestimoService, UsuarioService usuarioService) {
+    public Router(
+            ObraService obraService, AuthService authService, 
+            EmprestimoService emprestimoService, UsuarioService usuarioService
+        ) 
+    {
         this.obraService = obraService;
         this.usuarioService = usuarioService; 
         this.authService = authService;
@@ -46,7 +54,8 @@ public class Router {
     public void toGerenciamentoObras(JFrame janelaPai) {
         disposeJanelaPai(janelaPai);
         GerenciamentoDeObras view = new GerenciamentoDeObras(janelaPai, this);
-        GerenciamentoDeObrasController controller = new GerenciamentoDeObrasController(view, this.obraService, this);
+        GerenciamentoDeObrasController controller = new GerenciamentoDeObrasController(
+            view, this.obraService, this);
         controller.carregarDados();
         view.setVisible(true);
     }
@@ -54,7 +63,7 @@ public class Router {
     public void toCadastroDeObra(JFrame janelaPai, Obra obraSelecionada) {
         disposeJanelaPai(janelaPai);
         CadastroDeObra view = new CadastroDeObra(janelaPai, this, obraSelecionada);
-        CadastroDeObraController controller = new CadastroDeObraController(view, obraService, this);
+        new CadastroDeObraController(view, obraService, this);
         view.setVisible(true);
     }
 
@@ -70,7 +79,8 @@ public class Router {
     public void toGerenciamentoUsuarios(JFrame janelaPai) {
         disposeJanelaPai(janelaPai);
         GerenciamentoDeUsuarios view = new GerenciamentoDeUsuarios(janelaPai, this);
-        GerenciamentoDeUsuariosController controller = new GerenciamentoDeUsuariosController(view, this.usuarioService, this, this.authService);
+        GerenciamentoDeUsuariosController controller = new GerenciamentoDeUsuariosController(
+            view, this.usuarioService, this, this.authService);
         controller.carregarDados();
         view.setVisible(true);
     }
@@ -78,14 +88,30 @@ public class Router {
     public void toCadastroDeUsuario(JFrame janelaPai, Usuario usuarioSelecionado) {
         disposeJanelaPai(janelaPai);
         CadastroDeUsuario view = new CadastroDeUsuario(janelaPai, this, usuarioSelecionado);
-        CadastroDeUsuarioController controller = new CadastroDeUsuarioController(view, this.usuarioService, this);
+        new CadastroDeUsuarioController(view, this.usuarioService, this);
         view.setVisible(true);
     }
 
     public void toTelaPrincipal(JFrame janelaPai) {
         disposeJanelaPai(janelaPai);
         TelaPrincipal view = new TelaPrincipal();
-        TelaPrincipalController controller = new TelaPrincipalController(view, this, this.authService);
+        new TelaPrincipalController(view, this, this.authService);
         view.setVisible(true);
+    }
+
+    public void toTelaLogin() {
+        TelaLogin view = new TelaLogin();
+        new TelaLoginController(view, this, this.authService);
+        view.setVisible(true);
+    }
+
+    public void toCadastroDeSenha(
+            JFrame janelaPai, Router router, AuthService authService, String matricula
+        )
+    {   
+        disposeJanelaPai(janelaPai);
+        TelaCadastroSenha view = new TelaCadastroSenha();
+        new TelaCadastroSenhaController(view, this, authService, matricula);
+
     }
 }

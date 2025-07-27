@@ -11,5 +11,4 @@ public class EmprestimoNaoEncontradoException extends NaoEncontradoException {
     public EmprestimoNaoEncontradoException(){
         super("Empréstimo não registrado.");
     }
-
 }

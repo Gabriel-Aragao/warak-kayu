@@ -1,15 +1,10 @@
 package br.edu.ifpb.biblioteca.warakkayu.shared.view;
 
-import br.edu.ifpb.biblioteca.warakkayu.shared.controller.AcoesDoRodapeListener;
 import br.edu.ifpb.biblioteca.warakkayu.shared.controller.AcoesTelaPrincipalListener;
-import br.edu.ifpb.biblioteca.warakkayu.shared.view.Janela;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 
 import java.awt.*;
 
@@ -82,7 +77,6 @@ public class TelaPrincipal extends Janela {
     private JButton criarBotaoMenu(String texto) {
         JButton botao = new JButton(texto);
         botao.setFont(new Font("Arial", Font.BOLD, 16));
-        // Define uma altura preferencial para os botões ficarem maiores
         botao.setPreferredSize(new Dimension(200, 50));
         return botao;
     }

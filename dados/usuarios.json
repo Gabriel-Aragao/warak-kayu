@@ -38,5 +38,30 @@
     "email": "email",
     "telefone": "98776766",
     "tipoUsuario": "ESTAGIARIO"
+  },
+  {
+    "id": "4aac813a-4591-459a-834d-7782e6ffe13b",
+    "matricula": "1",
+    "nome": "admin",
+    "email": "email",
+    "senha": "$2a$10$sjyaME2Af0LYap6f61YZL.Gc58tSzYEIqPKoVIgi6mSza3uh3rRZC",
+    "telefone": "9999999",
+    "tipoUsuario": "ADMIN"
+  },
+  {
+    "id": "f3d6383c-2e07-41b1-9a0b-a3c61efd9fee",
+    "matricula": "2",
+    "nome": "bibliotecario",
+    "email": "email",
+    "telefone": "8888888",
+    "tipoUsuario": "BIBLIOTECARIO"
+  },
+  {
+    "id": "2f7517a5-11b5-4884-91f5-5befb5432ea4",
+    "matricula": "3",
+    "nome": "estagiario",
+    "email": "email",
+    "telefone": "7777777",
+    "tipoUsuario": "LEITOR"
   }
 ]

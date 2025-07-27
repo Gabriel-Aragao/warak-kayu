@@ -50,8 +50,7 @@ public class CampoDeCadastro extends JPanel {
 
             this.formattedTextField = new JFormattedTextField(formatadorNumerico);
             this.formattedTextField.setValue(0L);
-         
-        } else{
+        } else {
             this.formattedTextField = new JFormattedTextField();
         }
         this.formattedTextField.setFont(fonte);

@@ -28,12 +28,12 @@ public class App
                 emprestimoDAO, obraService, usuarioService
             );
 
-            AuthService authService = new AuthService();
+            AuthService authService = new AuthService(usuarioService);
             
             Router navegador = new Router(
                 obraService, authService, emprestimoService, usuarioService 
             );
-            navegador.toTelaPrincipal(null);
+            navegador.toTelaLogin();
         } catch (PersistenciaException e) {
             JOptionPane.showMessageDialog(
                 null, 
