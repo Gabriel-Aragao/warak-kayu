@@ -14,7 +14,6 @@ import br.edu.ifpb.biblioteca.warakkayu.Router;
 import br.edu.ifpb.biblioteca.warakkayu.emprestimo.controller.EmprestimoListener;
 import br.edu.ifpb.biblioteca.warakkayu.obra.model.Obra;
 import br.edu.ifpb.biblioteca.warakkayu.obra.view.ObrasTableModel;
-import br.edu.ifpb.biblioteca.warakkayu.shared.controller.AcoesDeCadastroListener;
 import br.edu.ifpb.biblioteca.warakkayu.shared.view.Cabecalho;
 import br.edu.ifpb.biblioteca.warakkayu.shared.view.Janela;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.model.Usuario;

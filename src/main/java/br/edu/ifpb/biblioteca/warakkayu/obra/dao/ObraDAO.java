@@ -19,6 +19,8 @@ import br.edu.ifpb.biblioteca.warakkayu.obra.util.ObraDeserializer;
 import br.edu.ifpb.biblioteca.warakkayu.shared.dao.Persistivel;
 import br.edu.ifpb.biblioteca.warakkayu.shared.exceptions.NaoEncontradoException;
 import br.edu.ifpb.biblioteca.warakkayu.shared.exceptions.PersistenciaException;
+import br.edu.ifpb.biblioteca.warakkayu.usuario.exception.UsuarioNaoEncontradoException;
+import br.edu.ifpb.biblioteca.warakkayu.usuario.model.Usuario;
 
 public class ObraDAO implements Persistivel<Obra> {
     private Path path;
@@ -125,5 +127,13 @@ public class ObraDAO implements Persistivel<Obra> {
         throw new ObraNaoEncontradaException();
     }
 
+    public Obra findByCodigo(Long codigo) throws ObraNaoEncontradaException{
+       for (Obra obra : this.obras) {
+            if (codigo == obra.getCodigo()) {
+                return obra;
+            }
+        }
+        throw new ObraNaoEncontradaException();
+    }
     
 }

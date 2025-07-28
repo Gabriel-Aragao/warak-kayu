@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import br.edu.ifpb.biblioteca.warakkayu.obra.dao.ObraDAO;
+import br.edu.ifpb.biblioteca.warakkayu.obra.exception.CodigoEmUsoException;
 import br.edu.ifpb.biblioteca.warakkayu.obra.exception.ObraNaoEncontradaException;
 import br.edu.ifpb.biblioteca.warakkayu.obra.model.Artigo;
 import br.edu.ifpb.biblioteca.warakkayu.obra.model.Livro;
@@ -61,10 +62,15 @@ public class ObraService implements CRUDService<Obra>{
 
     public void save(Obra obra, long codigo, String titulo, String autor, 
             int anoPublicacao, double valorDaMulta, TipoObra tipoObra) 
-            throws PersistenciaException, ObraNaoEncontradaException {
+            throws PersistenciaException, ObraNaoEncontradaException, CodigoEmUsoException {
 
+        
         if(obra == null) {
-            switch(tipoObra) {
+            try {
+                this.obraDAO.findByCodigo(codigo);
+                throw new CodigoEmUsoException();
+            } catch (ObraNaoEncontradaException e) {
+                switch(tipoObra) {
                 case ARTIGO:
                     obra = new Artigo(codigo, titulo, autor, anoPublicacao, valorDaMulta);
                     break;
@@ -76,6 +82,8 @@ public class ObraService implements CRUDService<Obra>{
                     break;
             }       
             this.add(obra);
+            }
+            
         } else {
             obra.setCodigo(codigo);
             obra.setTitulo(titulo);

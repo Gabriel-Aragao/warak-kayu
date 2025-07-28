@@ -1,67 +1,10 @@
 [
   {
-    "id": "0f50ea88-043f-49a2-b432-5407330d82ea",
-    "matricula": "2025",
-    "nome": "Leitor 2",
-    "email": "email@gmail.com",
-    "telefone": "999999999",
-    "tipoUsuario": "LEITOR"
-  },
-  {
-    "id": "cb003f91-445b-4a10-a8e3-dcf718faf7b3",
-    "matricula": "50",
-    "nome": "Leitor 1",
-    "email": "email",
-    "telefone": "9999999",
-    "tipoUsuario": "LEITOR"
-  },
-  {
-    "id": "01b18f95-5ffd-4602-a00d-c6b2e46583cf",
-    "matricula": "15",
-    "nome": "Admin",
-    "email": "email",
-    "telefone": "999999",
-    "tipoUsuario": "ADMIN"
-  },
-  {
-    "id": "38e443d0-aad6-4979-8cb0-ab7a08ce07ec",
-    "matricula": "100",
-    "nome": "biblio",
-    "email": "enail",
-    "telefone": "8888888",
-    "tipoUsuario": "BIBLIOTECARIO"
-  },
-  {
-    "id": "604f0950-5df8-4479-80b5-8fced1b88bdd",
-    "matricula": "122",
-    "nome": "estagiario",
-    "email": "email",
-    "telefone": "98776766",
-    "tipoUsuario": "ESTAGIARIO"
-  },
-  {
-    "id": "4aac813a-4591-459a-834d-7782e6ffe13b",
+    "id": "4841ec12-fb15-4731-92d1-0d58bc3cfc60",
     "matricula": "1",
-    "nome": "admin",
-    "email": "email",
-    "senha": "$2a$10$sjyaME2Af0LYap6f61YZL.Gc58tSzYEIqPKoVIgi6mSza3uh3rRZC",
-    "telefone": "9999999",
+    "nome": "ADMIN",
+    "email": "email@email.com",
+    "telefone": "(99)99999-9999",
     "tipoUsuario": "ADMIN"
-  },
-  {
-    "id": "f3d6383c-2e07-41b1-9a0b-a3c61efd9fee",
-    "matricula": "2",
-    "nome": "bibliotecario",
-    "email": "email",
-    "telefone": "8888888",
-    "tipoUsuario": "BIBLIOTECARIO"
-  },
-  {
-    "id": "2f7517a5-11b5-4884-91f5-5befb5432ea4",
-    "matricula": "3",
-    "nome": "estagiario",
-    "email": "email",
-    "telefone": "7777777",
-    "tipoUsuario": "LEITOR"
   }
 ]

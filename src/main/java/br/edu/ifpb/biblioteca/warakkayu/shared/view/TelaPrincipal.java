@@ -2,11 +2,14 @@ package br.edu.ifpb.biblioteca.warakkayu.shared.view;
 
 import br.edu.ifpb.biblioteca.warakkayu.shared.controller.AcoesTelaPrincipalListener;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import java.awt.*;
 
 public class TelaPrincipal extends Janela {
 

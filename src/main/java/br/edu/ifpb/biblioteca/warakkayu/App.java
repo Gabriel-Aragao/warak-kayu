@@ -6,6 +6,7 @@ import br.edu.ifpb.biblioteca.warakkayu.emprestimo.dao.EmprestimoDAO;
 import br.edu.ifpb.biblioteca.warakkayu.emprestimo.service.EmprestimoService;
 import br.edu.ifpb.biblioteca.warakkayu.obra.dao.ObraDAO;
 import br.edu.ifpb.biblioteca.warakkayu.obra.service.ObraService;
+import br.edu.ifpb.biblioteca.warakkayu.relatorio.service.RelatorioService;
 import br.edu.ifpb.biblioteca.warakkayu.shared.exceptions.PersistenciaException;
 import br.edu.ifpb.biblioteca.warakkayu.shared.service.AuthService;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.dao.UsuarioDAO;
@@ -28,10 +29,12 @@ public class App
                 emprestimoDAO, obraService, usuarioService
             );
 
+            RelatorioService relatorioService = new RelatorioService(emprestimoDAO, obraDAO, usuarioDAO);
+
             AuthService authService = new AuthService(usuarioService);
             
             Router navegador = new Router(
-                obraService, authService, emprestimoService, usuarioService 
+                obraService, authService, emprestimoService, usuarioService, relatorioService 
             );
             navegador.toTelaLogin();
         } catch (PersistenciaException e) {
