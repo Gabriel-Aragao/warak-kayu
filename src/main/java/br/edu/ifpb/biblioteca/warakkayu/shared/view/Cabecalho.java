@@ -39,9 +39,12 @@ public class Cabecalho extends JPanel {
         JPanel placeholderDireito = new JPanel();
         placeholderDireito.setOpaque(false);
         placeholderDireito.setPreferredSize(this.voltar.getPreferredSize());
-
         this.add(this.voltar, BorderLayout.WEST);
         this.add(this.tituloLabel, BorderLayout.CENTER);
         this.add(placeholderDireito, BorderLayout.EAST);
+    }
+
+    public JButton getVoltar() {
+        return this.voltar;
     }
 }

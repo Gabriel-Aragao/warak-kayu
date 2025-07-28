@@ -1,6 +1,5 @@
 package br.edu.ifpb.biblioteca.warakkayu.emprestimo.controller;
 
-import br.edu.ifpb.biblioteca.warakkayu.Router;
 import br.edu.ifpb.biblioteca.warakkayu.emprestimo.service.EmprestimoService;
 import br.edu.ifpb.biblioteca.warakkayu.emprestimo.view.RealizacaoEmprestimo;
 import br.edu.ifpb.biblioteca.warakkayu.obra.exception.ObraNaoDisponivelException;
@@ -15,23 +14,20 @@ public class RealizacaoEmprestimoController implements EmprestimoListener{
 
     private RealizacaoEmprestimo view;
     private EmprestimoService emprestimoService;
-    private Router router;
 
     public RealizacaoEmprestimoController(
                 RealizacaoEmprestimo view, 
                 AuthService authService, 
-                EmprestimoService emprestimoService, 
-                Router router
+                EmprestimoService emprestimoService
         )
     {
         this.view = view;
         this.emprestimoService = emprestimoService;
-        this.router = router;
         this.view.setListener(this);
     }
 
     public void carregarDados() {
-        view.getObrasTableModel().setObras(emprestimoService.listObras());
+        view.getObrasTableModel().setObras(emprestimoService.listObrasDisponiveis());
         view.getUsuariosTableModel().setUsuarios(emprestimoService.listLeitores());
     }
 

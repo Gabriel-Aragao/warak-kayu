@@ -4,4 +4,5 @@ public interface AcoesRelatoriosListener {
     public void aoClicarEmprestimos();
     public void aoClicarObras();
     public void aoClicarUsuarios();
+    public void aoClicarPagamentos();
 }

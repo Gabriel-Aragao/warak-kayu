@@ -25,7 +25,7 @@ public class CadastroDeObra extends Janela{
     private CampoDeCadastro anoPublicacao;
     private CampoDeCadastro valorDaMulta;
     private JButton criarObra;
-    private Cabecalho botaoVoltar;
+    private Cabecalho cabecalho;
     private AcoesDeCadastroListener listener; 
     private Obra obra;
     
@@ -39,7 +39,7 @@ public class CadastroDeObra extends Janela{
     }
 
     private void iniciarTela(JFrame janelaPai) {        
-        this.botaoVoltar = new Cabecalho(janelaPai, this, "Obra");
+        this.cabecalho = new Cabecalho(janelaPai, this, "Obra");
         
         this.tipo = new JComboBox<TipoObra>(TipoObra.values());
         this.codigo = new CampoDeCadastro("Código: ", 20, TipoDeEntrada.INTEIRO);
@@ -49,7 +49,7 @@ public class CadastroDeObra extends Janela{
         this.valorDaMulta = new CampoDeCadastro("Valor da multa: ", 20, TipoDeEntrada.DECIMAL);
         this.criarObra = new JButton("Salvar");
         
-        this.norte.add(botaoVoltar);
+        this.norte.add(cabecalho);
         
         this.centro.add(this.tipo);
         this.centro.add(this.codigo);
@@ -107,8 +107,8 @@ public class CadastroDeObra extends Janela{
         return this.criarObra;
     }
     
-    public Cabecalho getBotaoVoltar() {
-        return this.botaoVoltar;
+    public Cabecalho getCabecalho() {
+        return this.cabecalho;
     }
 
     public Obra getObra() {

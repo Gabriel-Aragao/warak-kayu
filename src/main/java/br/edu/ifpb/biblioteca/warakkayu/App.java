@@ -10,6 +10,8 @@ import br.edu.ifpb.biblioteca.warakkayu.usuario.model.TipoUsuario;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.model.Usuario;
 import br.edu.ifpb.biblioteca.warakkayu.obra.dao.ObraDAO;
 import br.edu.ifpb.biblioteca.warakkayu.obra.service.ObraService;
+import br.edu.ifpb.biblioteca.warakkayu.pagamento.dao.PagamentoDao;
+import br.edu.ifpb.biblioteca.warakkayu.pagamento.service.PagamentoService;
 import br.edu.ifpb.biblioteca.warakkayu.relatorio.service.RelatorioService;
 import br.edu.ifpb.biblioteca.warakkayu.shared.exceptions.PersistenciaException;
 import br.edu.ifpb.biblioteca.warakkayu.shared.service.AuthService;
@@ -32,13 +34,17 @@ public class App
             EmprestimoService emprestimoService = new EmprestimoService(
                 emprestimoDAO, obraService, usuarioService
             );
-
-            RelatorioService relatorioService = new RelatorioService(emprestimoDAO, obraDAO, usuarioDAO);
-
+            
             AuthService authService = new AuthService(usuarioService);
             
+            PagamentoDao pagamentoDao = new PagamentoDao(emprestimoService, usuarioService);
+            PagamentoService pagamentoService = new PagamentoService(pagamentoDao);
+            
+            RelatorioService relatorioService = new RelatorioService(emprestimoDAO, pagamentoDao);
+
             Router navegador = new Router(
-                obraService, authService, emprestimoService, usuarioService, relatorioService 
+                obraService, authService, emprestimoService, 
+                usuarioService, relatorioService, pagamentoService
             );
             navegador.toTelaLogin();
             

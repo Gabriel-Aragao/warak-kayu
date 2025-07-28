@@ -26,7 +26,7 @@ public class TelaLoginController implements AcoesLoginListener {
         String senha = new String(senhaChar);
         try {
             authService.autenticar(matricula, senha);
-            this.router.toTelaPrincipal(this.view);
+            this.router.toTelaPrincipal();
         } catch (AuthenticacaoException e) {
             this.view.exibirErro(e.getMessage());
         } catch (SenhaNaoCadastradaException e) {

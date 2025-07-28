@@ -16,6 +16,7 @@ import com.google.gson.GsonBuilder;
 import br.edu.ifpb.biblioteca.warakkayu.shared.dao.Persistivel;
 import br.edu.ifpb.biblioteca.warakkayu.shared.exceptions.PersistenciaException;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.exception.UsuarioNaoEncontradoException;
+import br.edu.ifpb.biblioteca.warakkayu.usuario.model.TipoUsuario;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.model.Usuario;
 
 public class UsuarioDAO implements Persistivel<Usuario> {
@@ -108,7 +109,7 @@ public class UsuarioDAO implements Persistivel<Usuario> {
     public void delete(UUID id) throws PersistenciaException, UsuarioNaoEncontradoException {
         Usuario usuarioEncontrado = findById(id);
         if (usuarioEncontrado != null) {
-            usuarios.remove(usuarioEncontrado);
+            usuarioEncontrado.setTipoUsuario(TipoUsuario.REMOVIDO);
             this.salvar();
         } else {
             throw new UsuarioNaoEncontradoException();

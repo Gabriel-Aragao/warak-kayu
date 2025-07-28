@@ -51,13 +51,10 @@ public Emprestimo deserialize(JsonElement json, Type typeOfT, JsonDeserializatio
         Usuario usuario = usuarioService.findById(usuarioId);
         Obra obra = obraService.findById(obraId);
         
-        // --- VALIDAÇÃO ADICIONADA ---
-        // Se o usuário não for encontrado, o programa vai quebrar AGORA com uma mensagem clara.
         if (usuario == null) {
             throw new JsonParseException("Não foi possível encontrar o usuário com ID: " + usuarioId 
                 + ". Verifique se este usuário existe no seu arquivo usuarios.json.");
         }
-        // Se a obra não for encontrada, o programa vai quebrar AGORA com uma mensagem clara.
         if (obra == null) {
             throw new JsonParseException("Não foi possível encontrar a obra com ID: " + obraId
                 + ". Verifique se esta obra existe no seu arquivo obras.json.");
@@ -78,7 +75,6 @@ public Emprestimo deserialize(JsonElement json, Type typeOfT, JsonDeserializatio
         return emprestimo;
 
     } catch (Exception e) {
-        // Agora, se outro erro acontecer, ele será encapsulado pela JsonParseException
         throw new JsonParseException(e.getMessage());
     }
 }

@@ -13,10 +13,7 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
 import br.edu.ifpb.biblioteca.warakkayu.emprestimo.model.Emprestimo;
-import br.edu.ifpb.biblioteca.warakkayu.emprestimo.model.StatusEmprestimo;
 import br.edu.ifpb.biblioteca.warakkayu.emprestimo.service.EmprestimoService;
-import br.edu.ifpb.biblioteca.warakkayu.obra.model.Obra;
-import br.edu.ifpb.biblioteca.warakkayu.obra.service.ObraService;
 import br.edu.ifpb.biblioteca.warakkayu.pagamento.model.MetodoPagamento;
 import br.edu.ifpb.biblioteca.warakkayu.pagamento.model.Pagamento;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.model.Usuario;

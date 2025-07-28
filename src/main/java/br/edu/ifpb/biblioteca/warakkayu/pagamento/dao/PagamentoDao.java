@@ -1,5 +1,6 @@
 package br.edu.ifpb.biblioteca.warakkayu.pagamento.dao;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,34 +15,31 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import br.edu.ifpb.biblioteca.warakkayu.emprestimo.exception.EmprestimoNaoEncontradoException;
-import br.edu.ifpb.biblioteca.warakkayu.emprestimo.model.Emprestimo;
-import br.edu.ifpb.biblioteca.warakkayu.emprestimo.model.StatusEmprestimo;
 import br.edu.ifpb.biblioteca.warakkayu.emprestimo.service.EmprestimoService;
-import br.edu.ifpb.biblioteca.warakkayu.emprestimo.util.EmprestimoTypeAdapter;
-import br.edu.ifpb.biblioteca.warakkayu.obra.exception.ObraNaoEncontradaException;
+import br.edu.ifpb.biblioteca.warakkayu.pagamento.exception.PagamentoNaoEncontradoException;
 import br.edu.ifpb.biblioteca.warakkayu.pagamento.model.Pagamento;
 import br.edu.ifpb.biblioteca.warakkayu.pagamento.util.PagamentoTypeAdapter;
 import br.edu.ifpb.biblioteca.warakkayu.shared.dao.Persistivel;
-import br.edu.ifpb.biblioteca.warakkayu.shared.exceptions.NaoEncontradoException;
 import br.edu.ifpb.biblioteca.warakkayu.shared.exceptions.PersistenciaException;
 import br.edu.ifpb.biblioteca.warakkayu.shared.util.LocalDateAdapter;
+import br.edu.ifpb.biblioteca.warakkayu.usuario.service.UsuarioService;
 
 public class PagamentoDao implements Persistivel<Pagamento> {
     private Path path;
-    private List<Pagamento> emprestimos;
+    private List<Pagamento> pagamentos;
     private final Gson gson;
 
-    public PagamentoDao(EmprestimoService emprestimoService) 
+    public PagamentoDao(EmprestimoService emprestimoService, UsuarioService usuarioService) 
             throws PersistenciaException 
     {
         this.path = Paths.get("dados", "pagamentos.json");
-        PagamentoTypeAdapter adapter = new PagamentoTypeAdapter(emprestimoService);
+        PagamentoTypeAdapter adapter = new PagamentoTypeAdapter(emprestimoService, usuarioService);
         this.gson = new GsonBuilder()
-                .registerTypeAdapter(Emprestimo.class, adapter)
+                .registerTypeAdapter(Pagamento.class, adapter)
                 .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
                 .setPrettyPrinting()
                 .create();
-        this.emprestimos = this.recuperar();
+        this.pagamentos = this.recuperar();
     }
 
     private void salvar() throws PersistenciaException {
@@ -55,7 +53,7 @@ public class PagamentoDao implements Persistivel<Pagamento> {
                 );
             }
         }
-        String json = this.gson.toJson(this.emprestimos);
+        String json = this.gson.toJson(this.pagamentos);
         try {
             Files.writeString(this.getPath(), json, StandardCharsets.UTF_8);
         } catch (IOException e) {
@@ -63,7 +61,7 @@ public class PagamentoDao implements Persistivel<Pagamento> {
         }
     }
 
-    private List<Emprestimo> recuperar() throws PersistenciaException {
+    private List<Pagamento> recuperar() throws PersistenciaException {
         if (Files.notExists(path.getParent())) {
             try {
                 Files.createDirectories(path.getParent());
@@ -79,7 +77,7 @@ public class PagamentoDao implements Persistivel<Pagamento> {
         }
         try {
             String jsonString = Files.readString(this.getPath());
-            return new ArrayList<>(Arrays.asList(this.gson.fromJson(jsonString, Emprestimo[].class)));
+            return new ArrayList<>(Arrays.asList(this.gson.fromJson(jsonString, Pagamento[].class)));
         } catch (IOException e) {
             throw new PersistenciaException(
                     "Não foi possível recuperar os empréstimos salvos!", e
@@ -91,47 +89,38 @@ public class PagamentoDao implements Persistivel<Pagamento> {
         return this.path;
     }
 
-    public Emprestimo findById(UUID id) {
-        for (Emprestimo emprestimo : this.emprestimos) {
-            if (id.equals(emprestimo.getId())) {
-                return emprestimo;
+    @Override
+    public Pagamento findById(UUID id) throws PagamentoNaoEncontradoException{
+        for (Pagamento pagamento : this.pagamentos) {
+            if (id.equals(pagamento.getId())) {
+                return pagamento;
             }
         }
-        return null;
+        throw new PagamentoNaoEncontradoException();
     }
 
     @Override
-    public void add(Emprestimo emprestimo) throws PersistenciaException {
-        this.emprestimos.add(emprestimo);
+    public void add(Pagamento pagamento) throws PersistenciaException {
+        this.pagamentos.add(pagamento);
         this.salvar();
     }
 
     @Override
-    public List<Emprestimo> list() {
-        return this.emprestimos;
-    }
-
-    public List<Emprestimo> listEmprestimosEmCurso() {
-        List<Emprestimo> emprestimosEmCurso = new ArrayList<Emprestimo>();
-        for (Emprestimo emprestimo : this.emprestimos) {
-            if (emprestimo.getStatusEmprestimo() == StatusEmprestimo.EM_CURSO) {
-                emprestimosEmCurso.add(emprestimo);
-            }
-        }
-        return emprestimosEmCurso;
+    public List<Pagamento> list() {
+        return this.pagamentos;
     }
 
     @Override
-    public void update(UUID id, Emprestimo emprestimo) throws PersistenciaException, ObraNaoEncontradaException {
+    public void update(UUID id, Pagamento pagamento) throws PersistenciaException {
         throw new PersistenciaException(
-            "A única alteração possível deve ser realizada através da devolução"
+            "Não é Possivel modificar um pagamento registrado"
         );
     }
 
     @Override
     public void delete(UUID id) throws PersistenciaException, EmprestimoNaoEncontradoException {
         throw new PersistenciaException(
-            "Não é possível remover um emprestimo registrado."
+            "Não é possível remover um pagamento registrado."
         );
     }
 }

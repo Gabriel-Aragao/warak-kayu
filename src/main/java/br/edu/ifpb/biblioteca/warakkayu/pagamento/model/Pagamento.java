@@ -17,10 +17,10 @@ public class Pagamento {
     private Emprestimo emprestimo;
 
     public Pagamento(
-        double valor, LocalDate data, MetodoPagamento metodoPagamento, Usuario pagante, Usuario recebedor,
-        Emprestimo emprestimo
+            double valor, LocalDate data, MetodoPagamento metodoPagamento, 
+            Usuario pagante, Usuario recebedor, Emprestimo emprestimo
         ) 
-        {
+    {
             this.id = UUID.randomUUID();
             this.valor = valor;
             this.data = data;

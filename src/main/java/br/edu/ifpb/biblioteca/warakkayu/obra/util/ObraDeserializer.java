@@ -13,7 +13,9 @@ import java.lang.reflect.Type;
 public class ObraDeserializer implements JsonDeserializer<Obra> {
 
     @Override
-    public Obra deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+    public Obra deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) 
+            throws JsonParseException 
+    {
         JsonObject jsonObject = json.getAsJsonObject();
 
         JsonElement tipoElement = jsonObject.get("tipoObra");
@@ -21,7 +23,6 @@ public class ObraDeserializer implements JsonDeserializer<Obra> {
             throw new JsonParseException("O campo 'tipoObra' não foi encontrado no JSON.");
         }
         
-        // Converte o valor do JSON para o nosso enum TipoObra
         TipoObra tipo = context.deserialize(tipoElement, TipoObra.class);
 
         Class<? extends Obra> classeConcreta;

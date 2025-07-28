@@ -56,6 +56,10 @@ public abstract class Obra implements Emprestavel{
         return this.id;
     }
 
+    public TipoObra geTipoObra() {
+        return this.tipoObra;
+    }
+
     public long getCodigo() {
         return this.codigo;
     }

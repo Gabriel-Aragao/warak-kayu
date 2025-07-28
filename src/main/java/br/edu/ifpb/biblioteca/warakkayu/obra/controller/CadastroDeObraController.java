@@ -1,6 +1,5 @@
 package br.edu.ifpb.biblioteca.warakkayu.obra.controller;
 
-import br.edu.ifpb.biblioteca.warakkayu.Router;
 import br.edu.ifpb.biblioteca.warakkayu.obra.exception.CodigoEmUsoException;
 import br.edu.ifpb.biblioteca.warakkayu.obra.exception.ObraNaoEncontradaException;
 import br.edu.ifpb.biblioteca.warakkayu.obra.model.Obra;
@@ -14,12 +13,10 @@ public class CadastroDeObraController implements AcoesDeCadastroListener {
     
     private final CadastroDeObra view;
     private final ObraService obraService;
-    private final Router router;
 
-    public CadastroDeObraController(CadastroDeObra view, ObraService obraService, Router router) {
+    public CadastroDeObraController(CadastroDeObra view, ObraService obraService) {
         this.view = view;
         this.obraService = obraService;
-        this.router = router;
         this.view.setListener(this);
     }
 
@@ -50,6 +47,6 @@ public class CadastroDeObraController implements AcoesDeCadastroListener {
         } catch (CodigoEmUsoException e ) {
             this.view.exibirErro(e.getMessage()+"\nOperação Cancelada.");
         }
-        this.router.toGerenciamentoObras(null);
+        this.view.getCabecalho().getVoltar().doClick();
     }
 }

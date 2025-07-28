@@ -2,6 +2,7 @@ package br.edu.ifpb.biblioteca.warakkayu.emprestimo.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import br.edu.ifpb.biblioteca.warakkayu.devolucao.exception.DevolucaoNaoEncontrada;
 import br.edu.ifpb.biblioteca.warakkayu.emprestimo.dao.EmprestimoDAO;
@@ -19,7 +20,7 @@ import br.edu.ifpb.biblioteca.warakkayu.usuario.model.TipoUsuario;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.model.Usuario;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.service.UsuarioService;
 
-public class EmprestimoService{
+public class EmprestimoService {
 
     private EmprestimoDAO emprestimoDAO;
     private ObraService obraService;
@@ -31,7 +32,7 @@ public class EmprestimoService{
         this.usuarioService = usuarioService;
     }
 
-    public List<Obra> listObras(){
+    public List<Obra> listObrasDisponiveis(){
         return this.obraService.listObrasDisponiveis();
     }
 
@@ -64,11 +65,18 @@ public class EmprestimoService{
         obra.emprestar();
         obraService.update(obra.getId(), obra);
     }
-    public void realizarDevolucao(Emprestimo emprestimo) throws DevolucaoNaoEncontrada, ObraNaoEncontradaException, PersistenciaException, EmprestimoNaoEncontradoException{
+    public void realizarDevolucao(Emprestimo emprestimo) 
+            throws DevolucaoNaoEncontrada, ObraNaoEncontradaException, 
+            PersistenciaException, EmprestimoNaoEncontradoException 
+    {
         emprestimo.registrarDevolucao();
         emprestimo.getObra().devolver();
         obraService.update(emprestimo.getObra().getId(), emprestimo.getObra());
         emprestimoDAO.salvarDevolucao(emprestimo.getId());
+    }
+
+    public Emprestimo findById(UUID id) throws EmprestimoNaoEncontradoException {
+        return this.emprestimoDAO.findById(id);
     }
     
 }

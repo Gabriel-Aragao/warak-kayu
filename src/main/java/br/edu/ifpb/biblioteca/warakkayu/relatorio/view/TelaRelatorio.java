@@ -6,8 +6,6 @@ import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 
 import br.edu.ifpb.biblioteca.warakkayu.relatorio.controller.AcoesRelatoriosListener;
 import br.edu.ifpb.biblioteca.warakkayu.shared.view.Cabecalho;
@@ -18,6 +16,7 @@ public class TelaRelatorio extends Janela {
     private JButton botaoEmprestimos;
     private JButton botaoObras;
     private JButton botaoUsuarios;
+    private JButton botaoPagamentos;
     private Cabecalho voltar;
 
     private AcoesRelatoriosListener listener; 
@@ -35,6 +34,7 @@ public class TelaRelatorio extends Janela {
         botaoEmprestimos = criarBotaoMenu("Empréstimos do mês");
         botaoObras = criarBotaoMenu("Obras mais emprestadas");
         botaoUsuarios = criarBotaoMenu("Usuários com mais atrasos");
+        botaoPagamentos = criarBotaoMenu("Pagamentos do mês");
 
         botaoEmprestimos.addActionListener(e -> {
             if (listener != null) {
@@ -52,10 +52,18 @@ public class TelaRelatorio extends Janela {
             }
         });
 
+        botaoPagamentos.addActionListener(e -> {
+            if (listener != null) {
+                listener.aoClicarPagamentos();
+            }
+        });
+
 
         this.centro.add(botaoEmprestimos, BorderLayout.CENTER);
         this.centro.add(botaoObras, BorderLayout.CENTER);
         this.centro.add(botaoUsuarios, BorderLayout.CENTER);
+        this.centro.add(botaoPagamentos, BorderLayout.CENTER);
+
     }
 
     public void setListener(AcoesRelatoriosListener listener) {
@@ -77,6 +85,10 @@ public class TelaRelatorio extends Janela {
     }
     public JButton getBotaoEmprestimos() { 
         return botaoEmprestimos; 
+    }
+
+    public JButton getBotaoPagamentos() { 
+        return botaoPagamentos; 
     }
 
 }

@@ -4,7 +4,6 @@ import java.util.List;
 import br.edu.ifpb.biblioteca.warakkayu.Router;
 import br.edu.ifpb.biblioteca.warakkayu.shared.controller.AcoesDoRodapeListener;
 import br.edu.ifpb.biblioteca.warakkayu.shared.exceptions.PersistenciaException;
-import br.edu.ifpb.biblioteca.warakkayu.shared.service.AuthService;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.exception.UsuarioNaoEncontradoException;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.model.TipoUsuario;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.model.Usuario;
@@ -15,20 +14,17 @@ public class GerenciamentoDeUsuariosController implements AcoesDoRodapeListener 
 
     private final GerenciamentoDeUsuarios view;
     private final UsuarioService usuarioService;
-    private final AuthService authService;
     private final Router router;
 
     public GerenciamentoDeUsuariosController(
             GerenciamentoDeUsuarios view, 
             UsuarioService usuarioService, 
-            Router router, 
-            AuthService authService
+            Router router
         ) 
     {
         this.view = view;
         this.usuarioService = usuarioService;
         this.router = router;
-        this.authService = authService;
         this.view.getPainelAcoes().setListener(this);
     }
     
@@ -50,8 +46,13 @@ public class GerenciamentoDeUsuariosController implements AcoesDoRodapeListener 
     @Override
     public void aoClicarAtualizar() {
         Usuario usuarioSelecionado = view.getUsuarioSelecionado();
+    
         if (usuarioSelecionado != null) {
-            router.toCadastroDeUsuario(this.view, usuarioSelecionado);
+            if(usuarioSelecionado.getTipoUsuario() == TipoUsuario.REMOVIDO) {
+                view.exibirErro("Não é possivel modificar um usuário removido.");
+            } else {
+                router.toCadastroDeUsuario(this.view, usuarioSelecionado);
+            }
         } else {
             view.exibirAviso("Selecione um usuário na tabela para atualizar.");
         }

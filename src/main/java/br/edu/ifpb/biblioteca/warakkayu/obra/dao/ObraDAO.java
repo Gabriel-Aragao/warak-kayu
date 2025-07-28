@@ -12,6 +12,7 @@ import java.util.UUID;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import br.edu.ifpb.biblioteca.warakkayu.obra.model.StatusObra;
 import br.edu.ifpb.biblioteca.warakkayu.obra.exception.ObraNaoEncontradaException;
 import br.edu.ifpb.biblioteca.warakkayu.obra.model.Obra;
 import br.edu.ifpb.biblioteca.warakkayu.obra.util.ObraDeserializer;
@@ -105,7 +106,7 @@ public class ObraDAO implements Persistivel<Obra> {
     public void delete(UUID id) throws PersistenciaException, ObraNaoEncontradaException {
         Obra obraEncontrada = this.findById(id);
         if (obraEncontrada != null) {
-            obras.remove(obraEncontrada);
+            obraEncontrada.setStatus(StatusObra.REMOVIDO);
             this.salvar();
         } else {
             throw new ObraNaoEncontradaException();

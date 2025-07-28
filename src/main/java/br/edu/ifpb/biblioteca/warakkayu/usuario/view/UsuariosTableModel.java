@@ -11,7 +11,7 @@ public class UsuariosTableModel extends AbstractTableModel {
 
     private List<Usuario> usuarios;
     // Defini colunas que fazem sentido para um usuário, você pode alterar se precisar
-    private final String[] colunas = {"Matrícula", "Nome", "Email", "Telefone"};
+    private final String[] colunas = {"Matrícula", "Nome", "Email", "Telefone", "Perfil"};
 
     public UsuariosTableModel() {
         this.usuarios = new ArrayList<>();
@@ -50,6 +50,8 @@ public class UsuariosTableModel extends AbstractTableModel {
                 return usuario.getEmail();
             case 3:
                 return usuario.getTelefone();
+            case 4:
+                return usuario.getTipoUsuario();
             default:
                 return null;
         }

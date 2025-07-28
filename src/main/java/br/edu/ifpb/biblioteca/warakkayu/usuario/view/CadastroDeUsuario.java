@@ -8,7 +8,6 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
 import br.edu.ifpb.biblioteca.warakkayu.Router;
-import br.edu.ifpb.biblioteca.warakkayu.obra.model.TipoObra;
 import br.edu.ifpb.biblioteca.warakkayu.shared.controller.AcoesDeCadastroListener;
 import br.edu.ifpb.biblioteca.warakkayu.shared.view.Cabecalho;
 import br.edu.ifpb.biblioteca.warakkayu.shared.view.CampoDeCadastro;
@@ -24,7 +23,7 @@ public class CadastroDeUsuario extends Janela {
     private CampoDeCadastro email;
     private CampoDeCadastro telefone;
     private JButton criarUsuario;
-    private Cabecalho botaoVoltar;
+    private Cabecalho cabecalho;
     private AcoesDeCadastroListener listener;
     private Usuario usuario;
 
@@ -38,7 +37,7 @@ public class CadastroDeUsuario extends Janela {
     }
 
     private void iniciarTela(JFrame janelaPai) {
-        this.botaoVoltar = new Cabecalho(janelaPai, this, "Usuário");
+        this.cabecalho = new Cabecalho(janelaPai, this, "Usuário");
         this.tipo = new JComboBox<TipoUsuario>(TipoUsuario.values());
         this.matricula = new CampoDeCadastro("Matrícula: ", 20, TipoDeEntrada.TEXTO);
         this.nome = new CampoDeCadastro("Nome: ", 20, TipoDeEntrada.TEXTO);
@@ -55,7 +54,7 @@ public class CadastroDeUsuario extends Janela {
             }
         });
 
-        this.norte.add(botaoVoltar);
+        this.norte.add(cabecalho);
         
         this.centro.add(this.tipo);
         this.centro.add(this.matricula);
@@ -73,6 +72,10 @@ public class CadastroDeUsuario extends Janela {
         this.email.setText(this.usuario.getEmail());
         this.telefone.setText(this.usuario.getTelefone());
     
+    }
+
+    public Cabecalho getCabecalho(){
+        return this.cabecalho;
     }
 
     public JComboBox<TipoUsuario> getTipo() {
@@ -97,10 +100,6 @@ public class CadastroDeUsuario extends Janela {
 
     public JButton getSalvarUsuario() {
         return this.criarUsuario;
-    }
-
-    public Cabecalho getBotaoVoltar() {
-        return this.botaoVoltar;
     }
 
     public Usuario getUsuario() {

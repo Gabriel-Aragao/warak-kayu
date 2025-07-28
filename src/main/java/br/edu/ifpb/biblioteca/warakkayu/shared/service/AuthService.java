@@ -43,6 +43,9 @@ public class AuthService {
         try {
             Usuario usuario = usuarioService.findByMatricula(matricula);
              String hashArmazenado = usuario.getSenha();
+             if(usuario.getTipoUsuario() == TipoUsuario.REMOVIDO){
+                throw new AuthenticacaoException();
+             }
              if(hashArmazenado == null) {
                 throw new SenhaNaoCadastradaException();
              }

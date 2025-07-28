@@ -1,6 +1,5 @@
 package br.edu.ifpb.biblioteca.warakkayu.usuario.controller;
 
-import br.edu.ifpb.biblioteca.warakkayu.Router;
 import br.edu.ifpb.biblioteca.warakkayu.shared.controller.AcoesDeCadastroListener;
 import br.edu.ifpb.biblioteca.warakkayu.shared.exceptions.PersistenciaException;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.exception.MatriculaEmUsoException;
@@ -14,12 +13,10 @@ public class CadastroDeUsuarioController implements AcoesDeCadastroListener {
     
     private final CadastroDeUsuario view;
     private final UsuarioService usuarioService;
-    private final Router router;
 
-    public CadastroDeUsuarioController(CadastroDeUsuario view, UsuarioService usuarioService, Router router) {
+    public CadastroDeUsuarioController(CadastroDeUsuario view, UsuarioService usuarioService) {
         this.view = view;
         this.usuarioService = usuarioService;
-        this.router = router;
         this.view.setListener(this);
     }
 
@@ -43,7 +40,6 @@ public class CadastroDeUsuarioController implements AcoesDeCadastroListener {
         } catch (MatriculaEmUsoException e) {
             this.view.exibirErro(e.getMessage()+"\nOperação Cancelada.");
         }   
-        
-        this.router.toGerenciamentoUsuarios(view);;
+        this.view.getCabecalho().getVoltar().doClick();
     }
 }

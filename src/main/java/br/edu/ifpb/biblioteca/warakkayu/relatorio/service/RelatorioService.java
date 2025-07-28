@@ -3,9 +3,9 @@ package br.edu.ifpb.biblioteca.warakkayu.relatorio.service;
 import br.edu.ifpb.biblioteca.warakkayu.emprestimo.dao.EmprestimoDAO;
 import br.edu.ifpb.biblioteca.warakkayu.emprestimo.model.Emprestimo;
 import br.edu.ifpb.biblioteca.warakkayu.emprestimo.model.StatusEmprestimo;
-import br.edu.ifpb.biblioteca.warakkayu.obra.dao.ObraDAO;
 import br.edu.ifpb.biblioteca.warakkayu.obra.model.Obra;
-import br.edu.ifpb.biblioteca.warakkayu.usuario.dao.UsuarioDAO;
+import br.edu.ifpb.biblioteca.warakkayu.pagamento.dao.PagamentoDao;
+import br.edu.ifpb.biblioteca.warakkayu.pagamento.model.Pagamento;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.model.Usuario;
 
 import com.itextpdf.kernel.pdf.PdfDocument;
@@ -32,13 +32,15 @@ public class RelatorioService {
 
     private static final String DEST_FOLDER = "relatorios";
     private final EmprestimoDAO emprestimoDAO;
-    private final ObraDAO obraDAO;
-    private final UsuarioDAO usuarioDAO;
+    private final PagamentoDao pagamentoDao;
 
-    public RelatorioService(EmprestimoDAO emprestimoDAO, ObraDAO obraDAO, UsuarioDAO usuarioDAO) {
+
+    public RelatorioService(
+            EmprestimoDAO emprestimoDAO, PagamentoDao pagamentoDao
+        ) 
+    {
         this.emprestimoDAO = emprestimoDAO;
-        this.obraDAO = obraDAO;
-        this.usuarioDAO = usuarioDAO;
+        this.pagamentoDao = pagamentoDao;
     }
 
     public void gerarRelatorioEmprestimosDoMes() throws IOException {
@@ -52,7 +54,10 @@ public class RelatorioService {
         String nomeArquivo = "emprestimos_do_mes_" + mesAtual.toString() + ".pdf";
         Document documento = criarDocumentoPdf(nomeArquivo);
 
-        adicionarCabecalho(documento, "Relatório de Empréstimos Realizados no Mês", "Mês/Ano de Referência: " + mesAtual.format(DateTimeFormatter.ofPattern("MM/yyyy")));
+        adicionarCabecalho(
+            documento, "Relatório de Empréstimos Realizados no Mês", 
+            "Mês/Ano de Referência: " + mesAtual.format(DateTimeFormatter.ofPattern("MM/yyyy"))
+        );
 
         Table tabela = new Table(UnitValue.createPercentArray(new float[]{1, 1, 3, 1, 3}));
         tabela.setWidth(UnitValue.createPercentValue(100));
@@ -114,7 +119,8 @@ public class RelatorioService {
         List<Emprestimo> emprestimos = emprestimoDAO.list();
 
         Map<Usuario, Long> contagemAtrasos = emprestimos.stream()
-            .filter(e -> e.getStatusEmprestimo() == StatusEmprestimo.CONCLUIDO_COM_ATRASO || e.getStatusEmprestimo() == StatusEmprestimo.CONCLUIDO_COM_ATRASO)
+            .filter(e -> e.getStatusEmprestimo() == StatusEmprestimo.CONCLUIDO_COM_ATRASO || 
+                         e.getStatusEmprestimo() == StatusEmprestimo.CONCLUIDO_COM_ATRASO)
             .collect(Collectors.groupingBy(Emprestimo::getUsuario, Collectors.counting()));
             
         List<Map.Entry<Usuario, Long>> usuariosOrdenados = contagemAtrasos.entrySet().stream()
@@ -124,7 +130,9 @@ public class RelatorioService {
         String nomeArquivo = "usuarios_com_mais_atrasos.pdf";
         Document documento = criarDocumentoPdf(nomeArquivo);
 
-        adicionarCabecalho(documento, "Relatório de Usuários com Mais Atrasos", null);
+        adicionarCabecalho(
+            documento, "Relatório de Usuários com Mais Atrasos", null
+        );
 
         Table tabela = new Table(UnitValue.createPercentArray(new float[]{1, 4, 2}));
         tabela.setWidth(UnitValue.createPercentValue(100));
@@ -144,6 +152,42 @@ public class RelatorioService {
         documento.close();
     }
 
+    public void gerarRelatorioPagamentosDoMes() throws IOException {
+        YearMonth mesAtual = YearMonth.now();
+        List<Pagamento> pagamentos = pagamentoDao.list();
+
+        List<Pagamento> pagamentosDoMes = pagamentos.stream()
+                .filter(pagamento -> YearMonth.from(pagamento.getData()).equals(mesAtual))
+                .collect(Collectors.toList());
+
+        String nomeArquivo = "pagamentos_do_mes_" + mesAtual.toString() + ".pdf";
+        Document documento = criarDocumentoPdf(nomeArquivo);
+
+        adicionarCabecalho(
+            documento, "Relatório de Pagamentos Realizados no Mês", 
+            "Mês/Ano de Referência: " + mesAtual.format(DateTimeFormatter.ofPattern("MM/yyyy"))
+        );
+
+        Table tabela = new Table(UnitValue.createPercentArray(new float[]{1, 2, 3, 3, 3}));
+        tabela.setWidth(UnitValue.createPercentValue(100));
+        
+        tabela.addHeaderCell(new Cell().add(new Paragraph("Data")));
+        tabela.addHeaderCell(new Cell().add(new Paragraph("Valor")));
+        tabela.addHeaderCell(new Cell().add(new Paragraph("Pagador")));
+        tabela.addHeaderCell(new Cell().add(new Paragraph("Recebedor")));
+        tabela.addHeaderCell(new Cell().add(new Paragraph("Obra")));
+
+        for (Pagamento pagamento : pagamentosDoMes) {
+            tabela.addCell(pagamento.getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            tabela.addCell("R$ "+String.format("%.2f", pagamento.getValor()));
+            tabela.addCell(pagamento.getPagante().getNome());
+            tabela.addCell(pagamento.getRecebedor().getNome());
+            tabela.addCell(pagamento.getEmprestimo().getObra().getTitulo());
+        }
+
+        documento.add(tabela);
+        documento.close();
+    }
 
     private Document criarDocumentoPdf(String nomeArquivo) throws IOException {
         Path pasta = Paths.get(DEST_FOLDER);

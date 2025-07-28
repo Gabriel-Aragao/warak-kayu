@@ -4,5 +4,6 @@ public enum TipoUsuario {
     ADMIN,
     BIBLIOTECARIO,
     ESTAGIARIO, 
-    LEITOR
+    LEITOR,
+    REMOVIDO
 }

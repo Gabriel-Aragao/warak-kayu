@@ -4,7 +4,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 import java.awt.Font;
@@ -15,10 +14,8 @@ import java.time.format.DateTimeFormatter;
 
 import br.edu.ifpb.biblioteca.warakkayu.Router;
 import br.edu.ifpb.biblioteca.warakkayu.emprestimo.model.Emprestimo;
-import br.edu.ifpb.biblioteca.warakkayu.obra.model.TipoObra;
 import br.edu.ifpb.biblioteca.warakkayu.pagamento.controller.AcoesDePagamentoListener;
 import br.edu.ifpb.biblioteca.warakkayu.pagamento.model.MetodoPagamento;
-import br.edu.ifpb.biblioteca.warakkayu.shared.controller.AcoesDeCadastroListener;
 import br.edu.ifpb.biblioteca.warakkayu.shared.view.Cabecalho;
 import br.edu.ifpb.biblioteca.warakkayu.shared.view.Janela;
 
@@ -74,6 +71,10 @@ public class TelaPagamento extends Janela {
 
     public void setListener(AcoesDePagamentoListener listener) {
         this.listener = listener;
+    }
+
+    public Cabecalho getCabecalho(){
+        return this.cabecalho;
     }
 
     public JComboBox<MetodoPagamento> getMetodo() {

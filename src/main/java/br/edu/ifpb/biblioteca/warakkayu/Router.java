@@ -8,6 +8,9 @@ import br.edu.ifpb.biblioteca.warakkayu.obra.model.Obra;
 import br.edu.ifpb.biblioteca.warakkayu.obra.service.ObraService;
 import br.edu.ifpb.biblioteca.warakkayu.obra.view.CadastroDeObra;
 import br.edu.ifpb.biblioteca.warakkayu.obra.view.GerenciamentoDeObras;
+import br.edu.ifpb.biblioteca.warakkayu.pagamento.controller.TelaPagamentoController;
+import br.edu.ifpb.biblioteca.warakkayu.pagamento.service.PagamentoService;
+import br.edu.ifpb.biblioteca.warakkayu.pagamento.view.TelaPagamento;
 import br.edu.ifpb.biblioteca.warakkayu.relatorio.controller.TelaRelatorioController;
 import br.edu.ifpb.biblioteca.warakkayu.relatorio.service.RelatorioService;
 import br.edu.ifpb.biblioteca.warakkayu.relatorio.view.TelaRelatorio;
@@ -27,6 +30,7 @@ import br.edu.ifpb.biblioteca.warakkayu.usuario.view.GerenciamentoDeUsuarios;
 import br.edu.ifpb.biblioteca.warakkayu.devolucao.controller.DevolucaoController;
 import br.edu.ifpb.biblioteca.warakkayu.devolucao.view.TelaDevolucao;
 import br.edu.ifpb.biblioteca.warakkayu.emprestimo.controller.RealizacaoEmprestimoController;
+import br.edu.ifpb.biblioteca.warakkayu.emprestimo.model.Emprestimo;
 import br.edu.ifpb.biblioteca.warakkayu.emprestimo.service.EmprestimoService;
 import br.edu.ifpb.biblioteca.warakkayu.emprestimo.view.RealizacaoEmprestimo;
 
@@ -38,12 +42,13 @@ public class Router {
     private AuthService authService;
     private EmprestimoService emprestimoService;
     private RelatorioService relatorioService;
+    private PagamentoService pagamentoService;
 
 
     public Router(
             ObraService obraService, AuthService authService, 
             EmprestimoService emprestimoService, UsuarioService usuarioService,
-            RelatorioService relatorioService
+            RelatorioService relatorioService, PagamentoService pagamentoService
         ) 
     {
         this.obraService = obraService;
@@ -51,6 +56,7 @@ public class Router {
         this.authService = authService;
         this.emprestimoService = emprestimoService;
         this.relatorioService = relatorioService;
+        this.pagamentoService = pagamentoService;
     }
     
     private void disposeJanelaPai(JFrame frame) {
@@ -71,7 +77,7 @@ public class Router {
     public void toCadastroDeObra(JFrame janelaPai, Obra obraSelecionada) {
         disposeJanelaPai(janelaPai);
         CadastroDeObra view = new CadastroDeObra(janelaPai, this, obraSelecionada);
-        new CadastroDeObraController(view, obraService, this);
+        new CadastroDeObraController(view, obraService);
         view.setVisible(true);
     }
 
@@ -79,7 +85,7 @@ public class Router {
         disposeJanelaPai(janelaPai);
         RealizacaoEmprestimo view = new RealizacaoEmprestimo(janelaPai, this);
         RealizacaoEmprestimoController controller = new RealizacaoEmprestimoController(
-            view, authService, emprestimoService, this);
+            view, authService, emprestimoService);
         controller.carregarDados();
         view.setVisible(true);
     }
@@ -88,7 +94,7 @@ public class Router {
         disposeJanelaPai(janelaPai);
         GerenciamentoDeUsuarios view = new GerenciamentoDeUsuarios(janelaPai, this);
         GerenciamentoDeUsuariosController controller = new GerenciamentoDeUsuariosController(
-            view, this.usuarioService, this, this.authService);
+            view, this.usuarioService, this);
         controller.carregarDados();
         view.setVisible(true);
     }
@@ -96,12 +102,11 @@ public class Router {
     public void toCadastroDeUsuario(JFrame janelaPai, Usuario usuarioSelecionado) {
         disposeJanelaPai(janelaPai);
         CadastroDeUsuario view = new CadastroDeUsuario(janelaPai, this, usuarioSelecionado);
-        new CadastroDeUsuarioController(view, this.usuarioService, this);
+        new CadastroDeUsuarioController(view, this.usuarioService);
         view.setVisible(true);
     }
 
-    public void toTelaPrincipal(JFrame janelaPai) {
-        disposeJanelaPai(janelaPai);
+    public void toTelaPrincipal() {
         TelaPrincipal view = new TelaPrincipal();
         new TelaPrincipalController(view, this, this.authService);
         view.setVisible(true);
@@ -127,11 +132,18 @@ public class Router {
         disposeJanelaPai(janelaPai);
         TelaDevolucao view = new TelaDevolucao(janelaPai, this);
         new DevolucaoController(view, emprestimoService, this);
-
+    }
+    
     public void toRelatorios(JFrame janelaPai) {
         disposeJanelaPai(janelaPai);
         TelaRelatorio view = new TelaRelatorio(janelaPai);
-        new TelaRelatorioController(view, this, this.emprestimoService, this.relatorioService);
+        new TelaRelatorioController(view, this.relatorioService);
         view.setVisible(true);
+    }
+
+    public void toPagamentos(JFrame janelaPai, Emprestimo emprestimo) {
+        disposeJanelaPai(janelaPai);
+        TelaPagamento view = new TelaPagamento(janelaPai, this, emprestimo);
+        new TelaPagamentoController(view, pagamentoService, authService, emprestimo);
     }
 }
