@@ -1,4 +1,4 @@
-package br.edu.ifpb.biblioteca.warakkayu.obra.view; // Coloque no mesmo pacote da sua tela
+package br.edu.ifpb.biblioteca.warakkayu.obra.view; 
 
 import br.edu.ifpb.biblioteca.warakkayu.obra.model.Artigo;
 import br.edu.ifpb.biblioteca.warakkayu.obra.model.Livro;
