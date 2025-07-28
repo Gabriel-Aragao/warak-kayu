@@ -11,11 +11,10 @@ import br.edu.ifpb.biblioteca.warakkayu.shared.service.AuthService;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.dao.UsuarioDAO;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.service.UsuarioService;
 
-
 public class App 
 {
     public static void main( String[] args )
-    {           
+    {         
         try {
             ObraDAO obraDAO = new ObraDAO();
             ObraService obraService = new ObraService(obraDAO);
@@ -34,13 +33,16 @@ public class App
                 obraService, authService, emprestimoService, usuarioService 
             );
             navegador.toTelaLogin();
+            
         } catch (PersistenciaException e) {
+            e.printStackTrace(); 
+            
             JOptionPane.showMessageDialog(
                 null, 
                 "Erro ao carregar os dados.\n"+ e.getMessage(), 
                 "Erro!!", 
                 JOptionPane.ERROR_MESSAGE
             );
-        }        
+        }       
     }
 }

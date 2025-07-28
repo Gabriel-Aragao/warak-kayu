@@ -96,7 +96,6 @@ public class ObraDAO implements Persistivel<Obra> {
             obraEncontrada.setCodigo(obra.getCodigo());
             obraEncontrada.setTitulo(obra.getTitulo());
             obraEncontrada.setAutor(obra.getAutor());
-            obraEncontrada.setTitulo(obra.getTitulo());
             obraEncontrada.setValorDaMulta(obra.getValorDaMulta());
             this.salvar();
         } else {

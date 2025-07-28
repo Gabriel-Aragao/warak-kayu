@@ -90,13 +90,13 @@ public class EmprestimoDAO implements Persistivel<Emprestimo> {
         return this.path;
     }
 
-    public Emprestimo findById(UUID id) {
+    public Emprestimo findById(UUID id) throws EmprestimoNaoEncontradoException {
         for (Emprestimo emprestimo : this.emprestimos) {
             if (id.equals(emprestimo.getId())) {
                 return emprestimo;
             }
         }
-        return null;
+        throw new EmprestimoNaoEncontradoException();
     }
 
     @Override
@@ -133,6 +133,11 @@ public class EmprestimoDAO implements Persistivel<Emprestimo> {
             "Não é possível remover um emprestimo registrado."
         );
     }
+    public void salvarDevolucao(UUID id) throws EmprestimoNaoEncontradoException, PersistenciaException{
+        Emprestimo emprestimoEncontrado = findById(id);
+        emprestimoEncontrado.registrarDevolucao();
+        this.salvar();
 
+    }
 
 }

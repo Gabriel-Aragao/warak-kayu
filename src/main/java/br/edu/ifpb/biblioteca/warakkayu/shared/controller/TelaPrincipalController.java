@@ -77,7 +77,7 @@ public class TelaPrincipalController implements AcoesTelaPrincipalListener {
 
     @Override
     public void aoClicarDevolucoes() {
-        this.view.exibirErro("Funcionalidade Não implementada!");
+        this.router.toDevolucao(this.view);
     }
 
     @Override

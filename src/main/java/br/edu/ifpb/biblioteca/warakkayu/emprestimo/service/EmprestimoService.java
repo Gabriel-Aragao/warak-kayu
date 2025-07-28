@@ -1,9 +1,13 @@
 package br.edu.ifpb.biblioteca.warakkayu.emprestimo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.ifpb.biblioteca.warakkayu.devolucao.exception.DevolucaoNaoEncontrada;
 import br.edu.ifpb.biblioteca.warakkayu.emprestimo.dao.EmprestimoDAO;
+import br.edu.ifpb.biblioteca.warakkayu.emprestimo.exception.EmprestimoNaoEncontradoException;
 import br.edu.ifpb.biblioteca.warakkayu.emprestimo.model.Emprestimo;
+import br.edu.ifpb.biblioteca.warakkayu.emprestimo.model.StatusEmprestimo;
 import br.edu.ifpb.biblioteca.warakkayu.obra.exception.ObraNaoDisponivelException;
 import br.edu.ifpb.biblioteca.warakkayu.obra.exception.ObraNaoEncontradaException;
 import br.edu.ifpb.biblioteca.warakkayu.obra.model.Obra;
@@ -35,6 +39,16 @@ public class EmprestimoService{
         return this.usuarioService.listLeitores();
     }
 
+    public List<Emprestimo> listEmprestimosEmCurso() {
+        List<Emprestimo> emprestimosEmCurso = new ArrayList<Emprestimo>();
+        for (Emprestimo emprestimo : this.emprestimoDAO.list()){
+            if (emprestimo.getStatusEmprestimo() == StatusEmprestimo.EM_CURSO) {
+                emprestimosEmCurso.add(emprestimo);
+            }
+        }
+        return emprestimosEmCurso;
+    }
+
     public void realizarEmprestimo(Usuario usuario, Obra obra) 
             throws PersistenciaException, ObraNaoEncontradaException, 
             ObraNaoDisponivelException, UsuarioNaoAptoException
@@ -49,6 +63,12 @@ public class EmprestimoService{
         this.emprestimoDAO.add(emprestimo);
         obra.emprestar();
         obraService.update(obra.getId(), obra);
+    }
+    public void realizarDevolucao(Emprestimo emprestimo) throws DevolucaoNaoEncontrada, ObraNaoEncontradaException, PersistenciaException, EmprestimoNaoEncontradoException{
+        emprestimo.registrarDevolucao();
+        emprestimo.getObra().devolver();
+        obraService.update(emprestimo.getObra().getId(), emprestimo.getObra());
+        emprestimoDAO.salvarDevolucao(emprestimo.getId());
     }
     
 }

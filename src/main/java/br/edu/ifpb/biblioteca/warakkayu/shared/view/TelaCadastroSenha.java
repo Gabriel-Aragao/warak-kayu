@@ -49,7 +49,7 @@ public class TelaCadastroSenha  extends Janela {
 
         this.confirmarSenhaPanel = new JPanel(new BorderLayout(5, 5));
         
-        this.confirmarSenhaLabel = new JLabel("Senha:");
+        this.confirmarSenhaLabel = new JLabel("Confirmar Senha:");
         this.confirmarSenhaLabel.setPreferredSize(new Dimension(200, this.confirmarSenhaLabel.getPreferredSize().height));
         this.confirmarSenhaLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         this.confirmarSenhaLabel.setFont(fonte);

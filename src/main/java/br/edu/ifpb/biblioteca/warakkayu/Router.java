@@ -21,6 +21,8 @@ import br.edu.ifpb.biblioteca.warakkayu.usuario.model.Usuario;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.service.UsuarioService;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.view.CadastroDeUsuario;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.view.GerenciamentoDeUsuarios;
+import br.edu.ifpb.biblioteca.warakkayu.devolucao.controller.DevolucaoController;
+import br.edu.ifpb.biblioteca.warakkayu.devolucao.view.TelaDevolucao;
 import br.edu.ifpb.biblioteca.warakkayu.emprestimo.controller.RealizacaoEmprestimoController;
 import br.edu.ifpb.biblioteca.warakkayu.emprestimo.service.EmprestimoService;
 import br.edu.ifpb.biblioteca.warakkayu.emprestimo.view.RealizacaoEmprestimo;
@@ -113,5 +115,12 @@ public class Router {
         TelaCadastroSenha view = new TelaCadastroSenha();
         new TelaCadastroSenhaController(view, this, authService, matricula);
 
+    }
+
+    public void toDevolucao (JFrame janelaPai) {
+        disposeJanelaPai(janelaPai);
+        TelaDevolucao view = new TelaDevolucao(janelaPai, this);
+        new DevolucaoController(view, emprestimoService, this);
+        view.setVisible(true);
     }
 }

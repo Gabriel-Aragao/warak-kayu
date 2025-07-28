@@ -5,7 +5,7 @@
     "titulo": "Livro 1",
     "autor": "Autor 1",
     "anoPublicacao": 1990,
-    "status": "EMPRESTADO",
+    "status": "DISPONIVEL",
     "valorDaMulta": 1.0,
     "tipoObra": "LIVRO"
   },
@@ -25,7 +25,7 @@
     "titulo": "Artigo 2",
     "autor": "JJ",
     "anoPublicacao": 1980,
-    "status": "DISPONIVEL",
+    "status": "EMPRESTADO",
     "valorDaMulta": 1.2,
     "tipoObra": "ARTIGO"
   },

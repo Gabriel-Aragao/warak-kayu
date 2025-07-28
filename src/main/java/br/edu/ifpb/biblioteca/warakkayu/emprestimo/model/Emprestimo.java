@@ -1,6 +1,7 @@
 package br.edu.ifpb.biblioteca.warakkayu.emprestimo.model;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
 import br.edu.ifpb.biblioteca.warakkayu.obra.model.Obra;
@@ -32,7 +33,7 @@ public class Emprestimo {
             StatusEmprestimo statusEmprestimo
         ) 
     {
-        this.id = UUID.randomUUID();
+        this.id = id;
         this.usuario = usuario;
         this.obra = obra;
         this.dataEmprestimo = dataEmprestimo;
@@ -65,13 +66,26 @@ public class Emprestimo {
         return this.statusEmprestimo;
     }
 
-    public void registrarDevoulucao() {
+    public void setStatusEmprestimo(StatusEmprestimo statusEmprestimo) {
+        this.statusEmprestimo = statusEmprestimo;
+    }
+
+    public void registrarDevolucao() {
         this.dataRealDevolucao = LocalDate.now();
         if(this.dataRealDevolucao.isAfter(this.dataPrevistaDevolucao)) {
             this.statusEmprestimo = StatusEmprestimo.CONCLUIDO_COM_ATRASO;
         } else {
             this.statusEmprestimo = StatusEmprestimo.CONCLUIDO;
         }
+    }
+    public double calcularMulta() {
+
+        if (dataPrevistaDevolucao.isBefore(LocalDate.now())) {
+            int dias = (int) ChronoUnit.DAYS.between(dataPrevistaDevolucao, LocalDate.now());
+            double multa = dias * obra.getValorDaMulta();
+            return multa;
+        }
+        return 0.00;
     }
     
     

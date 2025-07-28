@@ -1,14 +1,15 @@
 [
   {
-    "id": "1e63c2b2-5dd1-40a8-929f-bdfb2ea60ff6",
+    "id": "3ad1d2e3-37c6-4d54-a43a-7b340c7cec7f",
     "dataEmprestimo": "26/07/2025",
     "dataPrevistaDevolucao": "02/08/2025",
-    "statusEmprestimo": "EM_CURSO",
+    "statusEmprestimo": "CONCLUIDO",
+    "dataRealDevolucao": "28/07/2025",
     "usuarioId": "cb003f91-445b-4a10-a8e3-dcf718faf7b3",
     "obraId": "51e9a5b2-a866-4ad8-b564-990539ff2a01"
   },
   {
-    "id": "d3fc457f-5a5a-4d6b-a7ea-4bb16456e6fd",
+    "id": "7f642fcd-b5af-4a3b-8374-ac98e3454c48",
     "dataEmprestimo": "26/07/2025",
     "dataPrevistaDevolucao": "29/07/2025",
     "statusEmprestimo": "EM_CURSO",

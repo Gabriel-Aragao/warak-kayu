@@ -4,8 +4,9 @@
     "matricula": "2025",
     "nome": "Leitor 2",
     "email": "email@gmail.com",
+    "senha": "$2a$10$qts6Ds8un52riELO4NM.g.qsrVsNzoDNMwM6wzl.rinIlLyEc0k7q",
     "telefone": "999999999",
-    "tipoUsuario": "LEITOR"
+    "tipoUsuario": "BIBLIOTECARIO"
   },
   {
     "id": "cb003f91-445b-4a10-a8e3-dcf718faf7b3",
