@@ -25,7 +25,7 @@ public class GerenciamentoDeUsuarios extends Janela {
         super();
         
       
-        this.voltar = new Cabecalho(this, null, "Usuários"); 
+        this.voltar = new Cabecalho(janelaPai, this, "Usuários"); 
         
         this.usuariosTableModel = new UsuariosTableModel();
         this.tabela = new JTable(this.usuariosTableModel);
@@ -42,7 +42,6 @@ public class GerenciamentoDeUsuarios extends Janela {
         
     }
     
-    // ✅ 4. MÉTODOS ESSENCIAIS ADICIONADOS
     public Usuario getUsuarioSelecionado() {
         int selectedRow = tabela.getSelectedRow();
         if (selectedRow != -1) {

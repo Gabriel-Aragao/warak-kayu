@@ -41,7 +41,7 @@ public class CadastroDeUsuarioController implements AcoesDeCadastroListener {
         } catch (UsuarioNaoEncontradoException e) {
             this.view.exibirErro("Usuário Não encontrado! \nOperação Cancelada.");
         } catch (MatriculaEmUsoException e) {
-            this.view.exibirErro(e.getMessage());
+            this.view.exibirErro(e.getMessage()+"\nOperação Cancelada.");
         }   
         
         this.router.toGerenciamentoUsuarios(view);;

@@ -1,6 +1,7 @@
 package br.edu.ifpb.biblioteca.warakkayu.obra.controller;
 
 import br.edu.ifpb.biblioteca.warakkayu.Router;
+import br.edu.ifpb.biblioteca.warakkayu.obra.exception.CodigoEmUsoException;
 import br.edu.ifpb.biblioteca.warakkayu.obra.exception.ObraNaoEncontradaException;
 import br.edu.ifpb.biblioteca.warakkayu.obra.model.Obra;
 import br.edu.ifpb.biblioteca.warakkayu.obra.model.TipoObra;
@@ -46,6 +47,8 @@ public class CadastroDeObraController implements AcoesDeCadastroListener {
             this.view.exibirErro("Erro ao salvar a Obra! \nOperação Cancelada.");
         } catch(ObraNaoEncontradaException e) {
             this.view.exibirErro("Obra Não encontrada! \nOperação Cancelada.");
+        } catch (CodigoEmUsoException e ) {
+            this.view.exibirErro(e.getMessage()+"\nOperação Cancelada.");
         }
         this.router.toGerenciamentoObras(null);
     }

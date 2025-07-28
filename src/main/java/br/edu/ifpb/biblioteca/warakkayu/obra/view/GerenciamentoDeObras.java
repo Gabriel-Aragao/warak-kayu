@@ -25,7 +25,7 @@ public class GerenciamentoDeObras extends Janela {
     public GerenciamentoDeObras(JFrame janelaPai, Router router) {
         super();
         
-        this.voltar = new Cabecalho(this, null, "Obras");
+        this.voltar = new Cabecalho(janelaPai, this, "Obras");
         
         this.obrasTableModel = new ObrasTableModel();
         this.tabela = new JTable(this.obrasTableModel);

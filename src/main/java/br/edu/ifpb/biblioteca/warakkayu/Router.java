@@ -8,6 +8,9 @@ import br.edu.ifpb.biblioteca.warakkayu.obra.model.Obra;
 import br.edu.ifpb.biblioteca.warakkayu.obra.service.ObraService;
 import br.edu.ifpb.biblioteca.warakkayu.obra.view.CadastroDeObra;
 import br.edu.ifpb.biblioteca.warakkayu.obra.view.GerenciamentoDeObras;
+import br.edu.ifpb.biblioteca.warakkayu.relatorio.controller.TelaRelatorioController;
+import br.edu.ifpb.biblioteca.warakkayu.relatorio.service.RelatorioService;
+import br.edu.ifpb.biblioteca.warakkayu.relatorio.view.TelaRelatorio;
 import br.edu.ifpb.biblioteca.warakkayu.shared.controller.TelaCadastroSenhaController;
 import br.edu.ifpb.biblioteca.warakkayu.shared.controller.TelaLoginController;
 import br.edu.ifpb.biblioteca.warakkayu.shared.controller.TelaPrincipalController;
@@ -34,17 +37,20 @@ public class Router {
     private UsuarioService usuarioService; 
     private AuthService authService;
     private EmprestimoService emprestimoService;
+    private RelatorioService relatorioService;
 
 
     public Router(
             ObraService obraService, AuthService authService, 
-            EmprestimoService emprestimoService, UsuarioService usuarioService
+            EmprestimoService emprestimoService, UsuarioService usuarioService,
+            RelatorioService relatorioService
         ) 
     {
         this.obraService = obraService;
         this.usuarioService = usuarioService; 
         this.authService = authService;
         this.emprestimoService = emprestimoService;
+        this.relatorioService = relatorioService;
     }
     
     private void disposeJanelaPai(JFrame frame) {
@@ -121,6 +127,11 @@ public class Router {
         disposeJanelaPai(janelaPai);
         TelaDevolucao view = new TelaDevolucao(janelaPai, this);
         new DevolucaoController(view, emprestimoService, this);
+
+    public void toRelatorios(JFrame janelaPai) {
+        disposeJanelaPai(janelaPai);
+        TelaRelatorio view = new TelaRelatorio(janelaPai);
+        new TelaRelatorioController(view, this, this.emprestimoService, this.relatorioService);
         view.setVisible(true);
     }
 }

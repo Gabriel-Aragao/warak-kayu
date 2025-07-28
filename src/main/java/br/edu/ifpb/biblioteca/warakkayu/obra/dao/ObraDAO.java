@@ -14,10 +14,8 @@ import com.google.gson.GsonBuilder;
 
 import br.edu.ifpb.biblioteca.warakkayu.obra.exception.ObraNaoEncontradaException;
 import br.edu.ifpb.biblioteca.warakkayu.obra.model.Obra;
-import br.edu.ifpb.biblioteca.warakkayu.obra.model.StatusObra;
 import br.edu.ifpb.biblioteca.warakkayu.obra.util.ObraDeserializer;
 import br.edu.ifpb.biblioteca.warakkayu.shared.dao.Persistivel;
-import br.edu.ifpb.biblioteca.warakkayu.shared.exceptions.NaoEncontradoException;
 import br.edu.ifpb.biblioteca.warakkayu.shared.exceptions.PersistenciaException;
 
 public class ObraDAO implements Persistivel<Obra> {
@@ -124,5 +122,13 @@ public class ObraDAO implements Persistivel<Obra> {
         throw new ObraNaoEncontradaException();
     }
 
+    public Obra findByCodigo(Long codigo) throws ObraNaoEncontradaException{
+       for (Obra obra : this.obras) {
+            if (codigo == obra.getCodigo()) {
+                return obra;
+            }
+        }
+        throw new ObraNaoEncontradaException();
+    }
     
 }

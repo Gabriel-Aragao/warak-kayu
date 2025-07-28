@@ -21,7 +21,7 @@ public class Cabecalho extends JPanel {
         super(new BorderLayout());
 
         this.tituloLabel = new JLabel(titulo);
-        Font fonteTitulo = new Font("Arial", Font.BOLD, 20);
+        Font fonteTitulo = new Font("Arial", Font.BOLD, 24);
         this.tituloLabel.setFont(fonteTitulo);
         this.tituloLabel.setHorizontalAlignment(SwingConstants.CENTER); 
         

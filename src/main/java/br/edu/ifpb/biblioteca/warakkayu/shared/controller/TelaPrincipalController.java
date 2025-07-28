@@ -82,6 +82,6 @@ public class TelaPrincipalController implements AcoesTelaPrincipalListener {
 
     @Override
     public void aoClicarRelatorios() {
-        this.view.exibirErro("Funcionalidade Não implementada!");
+        this.router.toRelatorios(this.view);
     }
 }

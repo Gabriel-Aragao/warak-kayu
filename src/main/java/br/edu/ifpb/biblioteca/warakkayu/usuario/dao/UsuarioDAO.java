@@ -14,7 +14,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import br.edu.ifpb.biblioteca.warakkayu.shared.dao.Persistivel;
-import br.edu.ifpb.biblioteca.warakkayu.shared.exceptions.NaoEncontradoException;
 import br.edu.ifpb.biblioteca.warakkayu.shared.exceptions.PersistenciaException;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.exception.UsuarioNaoEncontradoException;
 import br.edu.ifpb.biblioteca.warakkayu.usuario.model.Usuario;
