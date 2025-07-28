@@ -55,4 +55,8 @@ public class AuthService {
             throw new AuthenticacaoException();
         }
     }
+
+    public Usuario getUsuarioLogado() {
+        return this.usuarioLogado;
+    }
 }

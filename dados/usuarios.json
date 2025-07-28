@@ -1,11 +1,3 @@
 [
-  {
-    "id": "5203abf0-8de2-48a6-92b0-562bb6b5a3f2",
-    "matricula": "admin",
-    "nome": "Admin",
-    "email": "admin",
-    "senha": "$2a$10$f5lzzlFWggfNwO1o4HEis.r6BjBtU3VzLjilKyRwqOq.Fs8BYoDs2",
-    "telefone": "+0 (00) 00000-0000",
-    "tipoUsuario": "ADMIN"
-  }
+
 ]

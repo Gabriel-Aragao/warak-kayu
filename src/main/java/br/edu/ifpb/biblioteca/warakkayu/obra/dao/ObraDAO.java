@@ -14,13 +14,9 @@ import com.google.gson.GsonBuilder;
 
 import br.edu.ifpb.biblioteca.warakkayu.obra.exception.ObraNaoEncontradaException;
 import br.edu.ifpb.biblioteca.warakkayu.obra.model.Obra;
-import br.edu.ifpb.biblioteca.warakkayu.obra.model.StatusObra;
 import br.edu.ifpb.biblioteca.warakkayu.obra.util.ObraDeserializer;
 import br.edu.ifpb.biblioteca.warakkayu.shared.dao.Persistivel;
-import br.edu.ifpb.biblioteca.warakkayu.shared.exceptions.NaoEncontradoException;
 import br.edu.ifpb.biblioteca.warakkayu.shared.exceptions.PersistenciaException;
-import br.edu.ifpb.biblioteca.warakkayu.usuario.exception.UsuarioNaoEncontradoException;
-import br.edu.ifpb.biblioteca.warakkayu.usuario.model.Usuario;
 
 public class ObraDAO implements Persistivel<Obra> {
     private Path path;
